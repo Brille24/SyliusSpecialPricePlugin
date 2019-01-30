@@ -1,0 +1,10 @@
+<container xmlns="http://symfony.com/schema/dic/services">
+    <services>
+        <service class="Brille24\SyliusSpecialPricePlugin\Calculator\SpecialPriceCalculator"
+                 id="brille24.sylius_special_price_plugin.calculator.special_price_calculator"
+                 decorates="sylius.calculator.product_variant_price"
+        >
+            <argument type="service" id="brille24.sylius_special_price_plugin.calculator.special_price_calculator.inner"/>
+        </service>
+    </services>
+</container>

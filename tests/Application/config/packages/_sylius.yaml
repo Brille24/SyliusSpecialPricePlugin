@@ -5,6 +5,7 @@ imports:
     - { resource: "@SyliusAdminApiBundle/Resources/config/app/config.yml" }
 
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
+    - { resource: "@Brille24SyliusSpecialPricePlugin/Resources/config/config.yml" }
 
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'

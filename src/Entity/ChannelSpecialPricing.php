@@ -49,7 +49,7 @@ class ChannelSpecialPricing implements ChannelSpecialPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function getProductVariant(): ProductVariantInterface
+    public function getProductVariant(): ?ProductVariantInterface
     {
         return $this->productVariant;
     }
@@ -57,7 +57,7 @@ class ChannelSpecialPricing implements ChannelSpecialPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function setProductVariant(ProductVariantInterface $productVariant): void
+    public function setProductVariant(?ProductVariantInterface $productVariant): void
     {
         $this->productVariant = $productVariant;
     }
@@ -65,7 +65,7 @@ class ChannelSpecialPricing implements ChannelSpecialPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function getPrice(): int
+    public function getPrice(): ?int
     {
         return $this->price;
     }
@@ -73,7 +73,7 @@ class ChannelSpecialPricing implements ChannelSpecialPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function setPrice(int $price): void
+    public function setPrice(?int $price): void
     {
         $this->price = $price;
     }
@@ -81,7 +81,7 @@ class ChannelSpecialPricing implements ChannelSpecialPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function getChannelCode(): string
+    public function getChannelCode(): ?string
     {
         return $this->channelCode;
     }
@@ -89,7 +89,7 @@ class ChannelSpecialPricing implements ChannelSpecialPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function setChannelCode(string $channelCode): void
+    public function setChannelCode(?string $channelCode): void
     {
         $this->channelCode = $channelCode;
     }
@@ -97,7 +97,7 @@ class ChannelSpecialPricing implements ChannelSpecialPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function getStartsAt(): \DateTimeInterface
+    public function getStartsAt(): ?\DateTimeInterface
     {
         return $this->startsAt;
     }
@@ -105,7 +105,7 @@ class ChannelSpecialPricing implements ChannelSpecialPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function setStartsAt(\DateTimeInterface $startsAt): void
+    public function setStartsAt(?\DateTimeInterface $startsAt): void
     {
         $this->startsAt = $startsAt;
     }
@@ -113,7 +113,7 @@ class ChannelSpecialPricing implements ChannelSpecialPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function getEndsAt(): \DateTimeInterface
+    public function getEndsAt(): ?\DateTimeInterface
     {
         return $this->endsAt;
     }
@@ -121,7 +121,7 @@ class ChannelSpecialPricing implements ChannelSpecialPricingInterface
     /**
      * {@inheritdoc}
      */
-    public function setEndsAt(\DateTimeInterface $endsAt): void
+    public function setEndsAt(?\DateTimeInterface $endsAt): void
     {
         $this->endsAt = $endsAt;
     }

@@ -1,0 +1,19 @@
+{# A tab per channel #}
+
+{# Build the menu selection #}
+<div class="ui top attached tabular menu">
+    {% for channel, child in form.children %}
+        <a class="item {% if loop.first %}active{% endif %}" data-tab="{{ channel }}">
+            {{ channel }}
+        </a>
+    {% endfor %}
+</div>
+
+{# Build the menu items #}
+{% for channel, child in form.children %}
+    <div class="ui bottom attached tab segment {% if loop.first %}active{% endif %}" data-tab="{{ channel }}">
+        <div class="ui field">
+            {{ form_row(child) }}
+        </div>
+    </div>
+{% endfor %}

@@ -10,52 +10,52 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 interface ChannelSpecialPricingInterface extends ResourceInterface
 {
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPrice(): int;
+    public function getPrice(): ?int;
 
     /**
-     * @param int $price
+     * @param int|null $price
      */
-    public function setPrice(int $price): void;
+    public function setPrice(?int $price): void;
 
     /**
-     * @return ProductVariantInterface
+     * @return ProductVariantInterface|null
      */
-    public function getProductVariant(): ProductVariantInterface;
+    public function getProductVariant(): ?ProductVariantInterface;
 
     /**
-     * @param ProductVariantInterface $productVariant
+     * @param ProductVariantInterface|null $productVariant
      */
-    public function setProductVariant(ProductVariantInterface $productVariant): void;
+    public function setProductVariant(?ProductVariantInterface $productVariant): void;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getChannelCode(): string ;
+    public function getChannelCode(): ?string ;
 
     /**
-     * @param string $channelCode
+     * @param string|null $channelCode
      */
-    public function setChannelCode(string $channelCode): void;
+    public function setChannelCode(?string $channelCode): void;
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
-    public function getStartsAt(): \DateTimeInterface;
+    public function getStartsAt(): ?\DateTimeInterface;
 
     /**
-     * @param \DateTimeInterface $startsAt
+     * @param \DateTimeInterface|null $startsAt
      */
-    public function setStartsAt(\DateTimeInterface $startsAt): void;
+    public function setStartsAt(?\DateTimeInterface $startsAt): void;
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
-    public function getEndsAt(): \DateTimeInterface;
+    public function getEndsAt(): ?\DateTimeInterface;
 
     /**
-     * @param \DateTimeInterface $endsAt
+     * @param \DateTimeInterface|null $endsAt
      */
-    public function setEndsAt(\DateTimeInterface $endsAt): void;
+    public function setEndsAt(?\DateTimeInterface $endsAt): void;
 }

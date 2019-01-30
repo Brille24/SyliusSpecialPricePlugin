@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Traits;
-
 
 use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
 use Doctrine\Common\Collections\ArrayCollection;

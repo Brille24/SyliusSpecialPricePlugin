@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Entity;
-
 
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -32,7 +32,7 @@ interface ChannelSpecialPricingInterface extends ResourceInterface
     /**
      * @return string|null
      */
-    public function getChannelCode(): ?string ;
+    public function getChannelCode(): ?string;
 
     /**
      * @param string|null $channelCode

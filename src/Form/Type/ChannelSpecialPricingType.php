@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Form\Type;
-
 
 use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;

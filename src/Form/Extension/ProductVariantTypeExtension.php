@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Form\Extension;
-
 
 use Brille24\SyliusSpecialPricePlugin\Form\Type\ChannelSpecialPricingType;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;

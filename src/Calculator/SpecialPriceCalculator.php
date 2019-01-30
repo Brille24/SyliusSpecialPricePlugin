@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Calculator;
 
 use Brille24\SyliusSpecialPricePlugin\Entity\ProductVariantInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface as SyliusProductVariantInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface as SyliusProductVariantInterface;
 use Webmozart\Assert\Assert;
 
 class SpecialPriceCalculator implements ProductVariantPriceCalculatorInterface

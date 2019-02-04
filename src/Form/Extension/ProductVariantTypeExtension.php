@@ -45,7 +45,7 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
                         'data' => $specialPrices,
                     ];
                 },
-                'label' => 'sylius.form.variant.special_price',
+                'label' => 'brille24.form.channel_special_price.special_prices',
             ]);
         });
 

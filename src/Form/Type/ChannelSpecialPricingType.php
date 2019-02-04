@@ -22,11 +22,15 @@ class ChannelSpecialPricingType extends AbstractResourceType
     {
         $builder
             ->add('price', MoneyType::class, [
-                'label' => 'brille24.ui.special_price',
+                'label' => 'brille24.form.channel_special_price.price',
                 'currency' => $options['channel']->getBaseCurrency()->getCode(),
             ])
-            ->add('startsAt', DateTimeType::class)
-            ->add('endsAt', DateTimeType::class)
+            ->add('startsAt', DateTimeType::class, [
+                'label' => 'brille24.form.channel_special_price.starts_at',
+            ])
+            ->add('endsAt', DateTimeType::class, [
+                'label' => 'brille24.form.channel_special_price.ends_at',
+            ])
         ;
 
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($options): void {

@@ -1,0 +1,7 @@
+brille24:
+    form:
+        channel_special_price:
+            special_prices: Spezialpreise
+            price: Preis
+            starts_at: Startet am
+            ends_at: Endet am

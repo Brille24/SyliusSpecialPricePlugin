@@ -1,0 +1,7 @@
+brille24:
+    form:
+        channel_special_price:
+            special_prices: Special prices
+            price: Price
+            starts_at: Start at
+            ends_at: Ends at

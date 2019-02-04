@@ -1,0 +1,5 @@
+brille24:
+    product_variant:
+        channel_special_pricing:
+            dates_overlap: Die Zeiträume dürfen nicht überlappen.
+            start_before_end: Das Startdatum muss vor dem Enddatum liegen.

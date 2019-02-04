@@ -4,9 +4,9 @@
                 class="Brille24\SyliusSpecialPricePlugin\Form\Type\ChannelSpecialPricingType"
                 id="brille24.sylius_special_price_plugin.form.type.channel_special_pricing_type"
         >
+            <tag name="form.type" />
             <argument>%brille24.model.channel_special_pricing.class%</argument>
             <argument>%sylius.form.type.channel_pricing.validation_groups%</argument>
-            <tag name="form.type" />
         </service>
 
         <service class="Brille24\SyliusSpecialPricePlugin\Form\Extension\ProductVariantTypeExtension"

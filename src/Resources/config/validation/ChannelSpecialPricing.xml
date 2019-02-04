@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricing">
+        <property name="price">
+            <constraint name="Range">
+                <option name="min">0.01</option>
+                <option name="minMessage">sylius.channel_pricing.price.min</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="NotNull">
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+
+        <constraint name="Brille24\SyliusSpecialPricePlugin\Validator\ChannelPricingDateConstraint">
+            <option name="groups">sylius</option>
+        </constraint>
+    </class>
+</constraint-mapping>

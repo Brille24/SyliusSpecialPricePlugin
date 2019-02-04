@@ -16,6 +16,11 @@ interface ProductVariantSpecialPricableInterface
     public function getChannelSpecialPricings(): Collection;
 
     /**
+     * @param Collection $channelSpecialPricings
+     */
+    public function setChannelSpecialPricings(Collection $channelSpecialPricings): void;
+
+    /**
      * @param ChannelInterface $channel
      *
      * @return ChannelSpecialPricingInterface|null
@@ -30,19 +35,19 @@ interface ProductVariantSpecialPricableInterface
     public function hasChannelSpecialPricingForChannel(ChannelInterface $channel): bool;
 
     /**
-     * @param ChannelSpecialPricingInterface $channelPricing
+     * @param ChannelSpecialPricingInterface $channelSpecialPricing
      *
      * @return bool
      */
-    public function hasChannelSpecialPricing(ChannelSpecialPricingInterface $channelPricing): bool;
+    public function hasChannelSpecialPricing(ChannelSpecialPricingInterface $channelSpecialPricing): bool;
 
     /**
-     * @param ChannelSpecialPricingInterface $channelPricing
+     * @param ChannelSpecialPricingInterface $channelSpecialPricing
      */
-    public function addChannelSpecialPricing(ChannelSpecialPricingInterface $channelPricing): void;
+    public function addChannelSpecialPricing(ChannelSpecialPricingInterface $channelSpecialPricing): void;
 
     /**
-     * @param ChannelSpecialPricingInterface $channelPricing
+     * @param ChannelSpecialPricingInterface $channelSpecialPricing
      */
-    public function removeChannelSpecialPricing(ChannelSpecialPricingInterface $channelPricing): void;
+    public function removeChannelSpecialPricing(ChannelSpecialPricingInterface $channelSpecialPricing): void;
 }

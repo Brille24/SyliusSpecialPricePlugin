@@ -24,6 +24,7 @@ class ChannelSpecialPricingType extends AbstractResourceType
             ->add('price', MoneyType::class, [
                 'label' => 'brille24.ui.special_price',
                 'currency' => $options['channel']->getBaseCurrency()->getCode(),
+
             ])
             ->add('startsAt', DateTimeType::class)
             ->add('endsAt', DateTimeType::class)

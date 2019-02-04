@@ -32,6 +32,14 @@ trait ProductVariantSpecialPricableTrait
     /**
      * {@inheritdoc}
      */
+    public function setChannelSpecialPricings(Collection $channelSpecialPricings): void
+    {
+        $this->channelSpecialPricings = $channelSpecialPricings;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getChannelSpecialPricingForChannel(ChannelInterface $channel): ?ChannelSpecialPricingInterface
     {
         if ($this->channelSpecialPricings->containsKey($channel->getCode())) {

@@ -5,7 +5,6 @@
                 target-entity="Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface"
                 mapped-by="productVariant"
                 orphan-removal="true"
-                index-by="channelCode"
         >
             <cascade>
                 <cascade-all/>

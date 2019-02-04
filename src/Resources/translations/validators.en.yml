@@ -1,0 +1,5 @@
+brille24:
+    product_variant:
+        channel_special_pricing:
+            dates_overlap: The date ranges should not overlap.
+            start_before_end: The start date must be smaller than the end date.

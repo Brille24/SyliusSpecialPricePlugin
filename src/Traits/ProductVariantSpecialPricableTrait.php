@@ -32,18 +32,35 @@ trait ProductVariantSpecialPricableTrait
     /**
      * {@inheritdoc}
      */
-    public function setChannelSpecialPricings(Collection $channelSpecialPricings): void
+    public function setChannelSpecialPricings(array $channelSpecialPricings): void
     {
-        $this->channelSpecialPricings = $channelSpecialPricings;
+        $this->channelSpecialPricings = new ArrayCollection($channelSpecialPricings);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getChannelSpecialPricingForChannel(ChannelInterface $channel): ?ChannelSpecialPricingInterface
+    public function getChannelSpecialPricingsForChannel(ChannelInterface $channel): Collection
     {
-        if ($this->channelSpecialPricings->containsKey($channel->getCode())) {
-            return $this->channelSpecialPricings->get($channel->getCode());
+        $specialPricings = $this->channelSpecialPricings->filter(function (ChannelSpecialPricingInterface $specialPricing) use ($channel) {
+            return $specialPricing->getChannelCode() === $channel->getCode();
+        });
+
+        return $specialPricings;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getChannelSpecialPricingForChannelAndDate(ChannelInterface $channel, \DateTime $dateTime): ?ChannelSpecialPricingInterface
+    {
+        $specialPricings = $this->getChannelSpecialPricingsForChannel($channel);
+
+        /** @var ChannelSpecialPricingInterface $specialPricing */
+        foreach ($specialPricings as $specialPricing) {
+            if ($dateTime >= $specialPricing->getStartsAt() && $dateTime < $specialPricing->getEndsAt()) {
+                return $specialPricing;
+            }
         }
 
         return null;
@@ -52,9 +69,9 @@ trait ProductVariantSpecialPricableTrait
     /**
      * {@inheritdoc}
      */
-    public function hasChannelSpecialPricingForChannel(ChannelInterface $channel): bool
+    public function hasChannelSpecialPricingsForChannel(ChannelInterface $channel): bool
     {
-        return null !== $this->getChannelSpecialPricingForChannel($channel);
+        return null !== $this->getChannelSpecialPricingsForChannel($channel);
     }
 
     /**
@@ -70,10 +87,7 @@ trait ProductVariantSpecialPricableTrait
      */
     public function addChannelSpecialPricing(ChannelSpecialPricingInterface $channelSpecialPricing): void
     {
-        if (!$this->hasChannelSpecialPricing($channelSpecialPricing)) {
-            $channelSpecialPricing->setProductVariant($this);
-            $this->channelSpecialPricings->set($channelSpecialPricing->getChannelCode(), $channelSpecialPricing);
-        }
+        $this->channelSpecialPricings->add($channelSpecialPricing);
     }
 
     /**
@@ -81,9 +95,6 @@ trait ProductVariantSpecialPricableTrait
      */
     public function removeChannelSpecialPricing(ChannelSpecialPricingInterface $channelSpecialPricing): void
     {
-        if ($this->hasChannelSpecialPricing($channelSpecialPricing)) {
-            $channelSpecialPricing->setProductVariant(null);
-            $this->channelSpecialPricings->remove($channelSpecialPricing->getChannelCode());
-        }
+        $this->channelSpecialPricings->removeElement($channelSpecialPricing);
     }
 }

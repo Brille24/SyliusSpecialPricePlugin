@@ -25,23 +25,18 @@ class SpecialPriceCalculator implements ProductVariantPriceCalculatorInterface
      * @param ProductVariantInterface $productVariant
      * @param array $context
      *
+     * @return int
+     *
      * @throws \Exception
      */
     public function calculate(SyliusProductVariantInterface $productVariant, array $context): int
     {
         Assert::keyExists($context, 'channel');
 
-        $specialPricing = $productVariant->getChannelSpecialPricingForChannel($context['channel']);
+        $currentDate = new \DateTime('now');
+        $specialPricing = $productVariant->getChannelSpecialPricingForChannelAndDate($context['channel'], $currentDate);
 
-        $priceValid = false;
-        if (null !== $specialPricing) {
-            // Check if the date is valid
-            $currentDate = new \DateTime('now');
-
-            $priceValid = ($currentDate >= $specialPricing->getStartsAt() && $currentDate < $specialPricing->getEndsAt());
-        }
-
-        if (!$priceValid) {
+        if (null === $specialPricing) {
             return $this->productVariantPriceCalculator->calculate($productVariant, $context);
         }
 

@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Form\Extension;
 
-use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
 use Brille24\SyliusSpecialPricePlugin\Entity\ProductVariantInterface;
 use Brille24\SyliusSpecialPricePlugin\Form\Type\ChannelSpecialPricingType;
-use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -33,8 +31,7 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
                 'entry_type' => CollectionType::class,
                 'entry_options' => function (ChannelInterface $channel) use ($productVariant) {
                     // Get all special prices by channel
-                    $specialPrices = $productVariant->hasChannelSpecialPricingForChannel($channel) ?
-                        [$productVariant->getChannelSpecialPricingForChannel($channel)] : [];
+                    $specialPrices = $productVariant->getChannelSpecialPricingsForChannel($channel);
 
                     return [
                         'entry_type' => ChannelSpecialPricingType::class,
@@ -52,20 +49,27 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
             ]);
         });
 
+        // Since the channelSpecialPricings form isn't mapped, we have to update the collection manually.
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void {
             /** @var ProductVariantInterface $productVariant */
             $productVariant = $event->getData();
             $formSpecialPricings = $event->getForm()->get('channelSpecialPricings')->getData();
 
-            $specialPricings = new ArrayCollection();
-            foreach ($formSpecialPricings as $channeledFormSpecialPricing) {
-                /** @var ChannelSpecialPricingInterface $formSpecialPricing */
-                foreach ($channeledFormSpecialPricing as $formSpecialPricing) {
-                    $specialPricings->set($formSpecialPricing->getChannelCode(), $formSpecialPricing);
-                }
+            /*
+             * Remove all special pricings from the product variant.
+             *
+             * We can't just override the collection, because then doctrine would remove all entities contained in that from the database.
+             */
+            foreach ($productVariant->getChannelSpecialPricings() as $channelSpecialPricing) {
+                $productVariant->removeChannelSpecialPricing($channelSpecialPricing);
             }
 
-            $productVariant->setChannelSpecialPricings($specialPricings);
+            // Add all special pricings from the form.
+            foreach ($formSpecialPricings as $channeledFormSpecialPricing) {
+                foreach ($channeledFormSpecialPricing as $formSpecialPricing) {
+                    $productVariant->addChannelSpecialPricing($formSpecialPricing);
+                }
+            }
         });
     }
 

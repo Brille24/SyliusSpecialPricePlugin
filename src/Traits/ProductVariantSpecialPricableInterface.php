@@ -16,23 +16,31 @@ interface ProductVariantSpecialPricableInterface
     public function getChannelSpecialPricings(): Collection;
 
     /**
-     * @param Collection $channelSpecialPricings
+     * @param array $channelSpecialPricings
      */
-    public function setChannelSpecialPricings(Collection $channelSpecialPricings): void;
+    public function setChannelSpecialPricings(array $channelSpecialPricings): void;
 
     /**
      * @param ChannelInterface $channel
      *
+     * @return Collection
+     */
+    public function getChannelSpecialPricingsForChannel(ChannelInterface $channel): Collection;
+
+    /**
+     * @param ChannelInterface $channel
+     * @param \DateTime $dateTime
+     *
      * @return ChannelSpecialPricingInterface|null
      */
-    public function getChannelSpecialPricingForChannel(ChannelInterface $channel): ?ChannelSpecialPricingInterface;
+    public function getChannelSpecialPricingForChannelAndDate(ChannelInterface $channel, \DateTime $dateTime): ?ChannelSpecialPricingInterface;
 
     /**
      * @param ChannelInterface $channel
      *
      * @return bool
      */
-    public function hasChannelSpecialPricingForChannel(ChannelInterface $channel): bool;
+    public function hasChannelSpecialPricingsForChannel(ChannelInterface $channel): bool;
 
     /**
      * @param ChannelSpecialPricingInterface $channelSpecialPricing

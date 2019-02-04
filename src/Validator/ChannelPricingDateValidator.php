@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Validator;
-
 
 use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
 use Symfony\Component\Validator\Constraint;
@@ -13,7 +13,6 @@ class ChannelPricingDateValidator extends ConstraintValidator
 {
     /**
      * @param ChannelSpecialPricingInterface $channelSpecialPricing
-     *
      * @param Constraint $constraint
      */
     public function validate($channelSpecialPricing, Constraint $constraint)

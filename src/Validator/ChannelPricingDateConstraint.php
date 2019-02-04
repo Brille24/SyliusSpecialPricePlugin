@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Validator;
-
 
 use Symfony\Component\Validator\Constraint;
 

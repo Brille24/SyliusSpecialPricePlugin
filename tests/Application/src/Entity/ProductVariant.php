@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Brille24\SyliusSpecialPricePlugin\Entity;
+namespace Tests\Brille24\SyliusSpecialPricePlugin\Entity;
 
 use Brille24\SyliusSpecialPricePlugin\Traits\ProductVariantSpecialPricableTrait;
 use Sylius\Component\Core\Model\ProductVariant as SyliusProductVariant;

@@ -1,9 +1,3 @@
-sylius_product:
-    resources:
-        product_variant:
-            classes:
-                model: Brille24\SyliusSpecialPricePlugin\Entity\ProductVariant
-
 sylius_resource:
     resources:
         brille24.channel_special_pricing:

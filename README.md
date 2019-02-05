@@ -1,6 +1,7 @@
+# Sylius Special Price Plugin
 [![Build Status](https://travis-ci.org/Brille24/SyliusSpecialPricePlugin.svg?branch=master)](https://travis-ci.org/Brille24/SyliusSpecialPricePlugin)
 
-### Installation ###
+### Installation
 1. Require the plugin
     ```bash
     composer require brille24/sylius-special-price-plugin
@@ -22,7 +23,7 @@
     ```
 
 4. Override ProductVariant entity
-    1. Write new class which will use ProductVariantSpecialPricableTrait and implement ProductVariantSpecialPricableInterface
+    1. Write new class which will use `ProductVariantSpecialPricableTrait` and implement `ProductVariantSpecialPricableInterface`
     2. Override the models class in config
         ```yaml
         sylius_product:
@@ -37,8 +38,7 @@
     bin/console doctrine:schema:update --force
     ```
 
-### Opening Sylius from the plugin
-
+### Running the test server
 From the plugin root directory, run the following commands:
 
 ```bash
@@ -52,3 +52,6 @@ From the plugin root directory, run the following commands:
 
 (cd tests/Application && bin/console server:start)
 ```
+
+### Testing
+In order to run the phpspec tests you need to run the command `vendor/bin/phpspec run`

@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Brille24\SyliusSpecialPricePlugin\Validator;
 
 use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricing;
-use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
 use Brille24\SyliusSpecialPricePlugin\Entity\ProductVariantInterface;
 use Brille24\SyliusSpecialPricePlugin\Validator\ProductVariantChannelSpecialPriceDateOverlapConstraint;
 use Brille24\SyliusSpecialPricePlugin\Validator\ProductVariantChannelSpecialPriceDateOverlapValidator;
@@ -52,7 +53,7 @@ class ProductVariantChannelSpecialPriceDateOverlapValidatorSpec extends ObjectBe
         $secondPrice->setEndsAt(new \DateTime('tomorrow'));
         $secondPrice->setChannelCode('FIRST');
 
-        $productVariant->getChannelSpecialPricings()->willReturn(new ArrayCollection([$firstPrice, $secondPrice]));;
+        $productVariant->getChannelSpecialPricings()->willReturn(new ArrayCollection([$firstPrice, $secondPrice]));
 
         $context->buildViolation(Argument::any())->shouldNotBeCalled();
         $violationBuilder->atPath(Argument::any())->shouldNotBeCalled();

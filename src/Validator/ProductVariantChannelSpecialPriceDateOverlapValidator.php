@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Brille24\SyliusSpecialPricePlugin\Validator;
 
 use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
-use Brille24\SyliusSpecialPricePlugin\Entity\ProductVariantInterface;
+use Brille24\SyliusSpecialPricePlugin\Traits\ProductVariantSpecialPricableInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class ProductVariantChannelSpecialPriceDateOverlapValidator extends ConstraintValidator
 {
     /**
-     * @param ProductVariantInterface $productVariant
+     * @param ProductVariantSpecialPricableInterface $productVariant
      * @param Constraint $constraint
      */
     public function validate($productVariant, Constraint $constraint)

@@ -16,7 +16,6 @@ default:
                 - sylius.behat.context.transform.order
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_variant
-
                 - sylius.behat.context.transform.shared_storage
 
                 - sylius.behat.context.ui.admin.dashboard
@@ -29,3 +28,27 @@ default:
 
             filters:
                 tags: "@admin && @special_prices && @ui"
+
+        ui_shop_special_prices:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.product
+
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.channel
+                - sylius.behat.context.transform.date_time
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.order
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_variant
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.ui.shop.cart
+                - sylius.behat.context.ui.shop.product
+
+                - brille24.sylius_special_price_plugin.behat.context.setup.special_price_context
+
+            filters:
+                tags: "@shop && @special_prices && @ui"

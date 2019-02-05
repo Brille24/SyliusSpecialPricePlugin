@@ -5,13 +5,14 @@ namespace Tests\Brille24\SyliusSpecialPricePlugin\Behat\Context\Ui\Admin;
 
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
+use Brille24\SyliusSpecialPricePlugin\Entity\ProductVariantInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Tests\Brille24\SyliusSpecialPricePlugin\Behat\Page\Admin\ProductVariantCreatePage;
 use Tests\Brille24\SyliusSpecialPricePlugin\Behat\Page\Admin\ProductVariantUpdatePage;
+use Webmozart\Assert\Assert;
 
 class SpecialPriceContext implements Context
 {
@@ -19,14 +20,17 @@ class SpecialPriceContext implements Context
      * @var CurrentPageResolverInterface
      */
     private $currentPageResolver;
+
     /**
      * @var ProductVariantCreatePage
      */
     private $createPage;
+
     /**
      * @var ProductVariantUpdatePage
      */
     private $updatePage;
+
     /**
      * @var NotificationCheckerInterface
      */
@@ -56,6 +60,17 @@ class SpecialPriceContext implements Context
     }
 
     /**
+     * @When I remove a special price for channel :channel
+     */
+    public function iRemoveASpecialPriceForChannel(ChannelInterface $channel)
+    {
+        /** @var ProductVariantCreatePage|ProductVariantUpdatePage $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->removeSpecialPriceForChannel($channel);
+    }
+
+    /**
      * @Then I should be notified that the price field cannot be empty
      */
     public function iShouldBeNotifiedThatThePriceFieldCannotBeEmpty()
@@ -66,26 +81,29 @@ class SpecialPriceContext implements Context
     /**
      * @When I set the start date to :date for channel :channel
      */
-    public function iSetTheStartDateTo(\DateTime $dateTime, ChannelInterface $channel)
+    public function iSetTheStartDateTo(\DateTime $date, ChannelInterface $channel)
     {
         /** @var ProductVariantCreatePage|ProductVariantUpdatePage $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->setStartDate($dateTime, $channel);
+        $currentPage->setStartDate($date, $channel);
     }
 
     /**
-     * @When I set the end date to :arg1 for channel :channel
+     * @When I set the end date to :date for channel :channel
      */
-    public function iSetTheEndDateTo($arg1)
+    public function iSetTheEndDateTo(\DateTime $date, ChannelInterface $channel)
     {
-        throw new PendingException();
+        /** @var ProductVariantCreatePage|ProductVariantUpdatePage $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->setEndDate($date, $channel);
     }
 
     /**
-     * @When I set the price to :price for channel :channel
+     * @When /^I set the price to ("[^"]+") for (channel "([^"]+)")$/
      */
-    public function iSetThePriceTo(int $price, ChannelInterface $channel)
+    public function iSetThePriceTo($price, ChannelInterface $channel)
     {
         /** @var ProductVariantCreatePage|ProductVariantUpdatePage $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -98,7 +116,7 @@ class SpecialPriceContext implements Context
      */
     public function iShouldBeNotifiedThatTheStartDateMustBeSmallerThanTheEndDate()
     {
-        throw new PendingException();
+        $this->notificationChecker->checkNotification('brille24.product_variant.channel_special_pricing.start_before_end', NotificationType::failure());
     }
 
     /**
@@ -106,6 +124,22 @@ class SpecialPriceContext implements Context
      */
     public function iShouldBeNotifiedThatTheDatesCannotOverlap()
     {
-        throw new PendingException();
+        $this->notificationChecker->checkNotification('brille24.product_variant.channel_special_pricing.dates_overlap', NotificationType::failure());
+    }
+
+    /**
+     * @Then the :variant variant should have :count special price(s)
+     */
+    public function theVariantShouldHaveSpecialPrices(ProductVariantInterface $variant, int $count)
+    {
+        Assert::count($variant->getChannelSpecialPricings(), $count);
+    }
+
+    /**
+     * @Then the :variant variant should have :count special price(s) for channel :channel
+     */
+    public function theVariantShouldHaveSpecialPriceForChannel(ProductVariantInterface $variant, int $count, ChannelInterface $channel)
+    {
+        Assert::count($variant->getChannelSpecialPricingsForChannel($channel), $count);
     }
 }

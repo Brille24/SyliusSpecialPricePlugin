@@ -1,5 +1,5 @@
 {
-    "name": "brille24/special-price-plugin",
+    "name": "brille24/sylius-special-price-plugin",
     "type": "sylius-plugin",
     "keywords": ["sylius", "sylius-plugin"],
     "description": "Provides time based special pricing for Sylius.",

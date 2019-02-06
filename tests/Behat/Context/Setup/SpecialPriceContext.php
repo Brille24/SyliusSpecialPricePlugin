@@ -6,10 +6,10 @@ namespace Tests\Brille24\SyliusSpecialPricePlugin\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
-use Brille24\SyliusSpecialPricePlugin\Entity\ProductVariant;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Tests\Application\SyliusSpecialPricePlugin\Entity\ProductVariant;
 
 class SpecialPriceContext implements Context
 {

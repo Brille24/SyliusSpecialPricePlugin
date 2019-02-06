@@ -64,7 +64,18 @@
         </constraint-mapping>
         ```
 
-5. Update the database schema
+6. Override ```SyliusAdminBundle/ProductVariant/Tab/_details.html.twig```
+    
+    Add this:
+    ```twig
+    <div class="ui segment">
+        {% include 'Brille24SyliusSpecialPricePlugin::_specialPrice.html.twig' with {
+            'form': form.channelSpecialPricings
+        } %}
+    </div>
+    ```
+
+7. Update the database schema
     ```bash
     bin/console doctrine:schema:update --force
     ```

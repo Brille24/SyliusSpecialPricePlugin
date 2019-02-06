@@ -21,7 +21,12 @@
         - { resource: "@Brille24SyliusSpecialPricePlugin/Resources/config/config.yml" }
     ```
 
-4. Override ProductVariant entity
+4. Update the database schema
+    ```bash
+    bin/console doctrine:schema:update --force
+    ```
+
+[//]: # (4. Override ProductVariant entity
     1. Write new class which will use ProductVariantSpecialPricableTrait and implement ProductVariantSpecialPricableInterface
     2. Override the models class in config
         ```yaml
@@ -30,12 +35,8 @@
                 product_variant:
                     classes:
                         model: Brille24\SyliusSpecialPricePlugin\Entity\ProductVariant
-        ```
+        ```)
 
-5. Update the database schema
-    ```bash
-    bin/console doctrine:schema:update --force
-    ```
 
 ### Opening Sylius from the plugin
 

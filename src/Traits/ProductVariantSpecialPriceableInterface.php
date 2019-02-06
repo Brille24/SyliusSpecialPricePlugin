@@ -8,7 +8,7 @@ use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-interface ProductVariantSpecialPricableInterface
+interface ProductVariantSpecialPriceableInterface
 {
     /**
      * @return Collection
@@ -33,7 +33,7 @@ interface ProductVariantSpecialPricableInterface
      *
      * @return ChannelSpecialPricingInterface|null
      */
-    public function getChannelSpecialPricingForChannelAndDate(ChannelInterface $channel, \DateTime $dateTime): ?ChannelSpecialPricingInterface;
+    public function getChannelSpecialPricingForChannelAndDate(ChannelInterface $channel, ?\DateTime $dateTime = null): ?ChannelSpecialPricingInterface;
 
     /**
      * @param ChannelInterface $channel

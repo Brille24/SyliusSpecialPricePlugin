@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Calculator;
 
-use Brille24\SyliusSpecialPricePlugin\Entity\ProductVariantInterface;
+use Brille24\SyliusSpecialPricePlugin\Traits\ProductVariantSpecialPriceableInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface as SyliusProductVariantInterface;
 use Webmozart\Assert\Assert;
@@ -22,7 +22,7 @@ class SpecialPriceCalculator implements ProductVariantPriceCalculatorInterface
     }
 
     /**
-     * @param ProductVariantInterface $productVariant
+     * @param ProductVariantSpecialPriceableInterface $productVariant
      * @param array $context
      *
      * @return int
@@ -33,8 +33,7 @@ class SpecialPriceCalculator implements ProductVariantPriceCalculatorInterface
     {
         Assert::keyExists($context, 'channel');
 
-        $currentDate = new \DateTime('now');
-        $specialPricing = $productVariant->getChannelSpecialPricingForChannelAndDate($context['channel'], $currentDate);
+        $specialPricing = $productVariant->getChannelSpecialPricingForChannelAndDate($context['channel']);
 
         if (null === $specialPricing) {
             return $this->productVariantPriceCalculator->calculate($productVariant, $context);

@@ -1,0 +1,11 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <mapped-superclass name="Tests\Application\SyliusSpecialPricePlugin\Entity\ProductVariant" table="sylius_product_variant">
+        <one-to-many field="channelSpecialPricings"
+                     target-entity="Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface"
+                     mapped-by="productVariant" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+    </mapped-superclass>
+</doctrine-mapping>

@@ -5,11 +5,11 @@ namespace Tests\Brille24\SyliusSpecialPricePlugin\Behat\Context\Ui\Admin;
 
 
 use Behat\Behat\Context\Context;
-use Brille24\SyliusSpecialPricePlugin\Entity\ProductVariantInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Tests\Application\SyliusSpecialPricePlugin\Entity\ProductVariant;
 use Tests\Brille24\SyliusSpecialPricePlugin\Behat\Page\Admin\ProductVariantCreatePage;
 use Tests\Brille24\SyliusSpecialPricePlugin\Behat\Page\Admin\ProductVariantUpdatePage;
 use Webmozart\Assert\Assert;
@@ -130,7 +130,7 @@ class SpecialPriceContext implements Context
     /**
      * @Then the :variant variant should have :count special price(s)
      */
-    public function theVariantShouldHaveSpecialPrices(ProductVariantInterface $variant, int $count)
+    public function theVariantShouldHaveSpecialPrices(ProductVariant $variant, int $count)
     {
         Assert::count($variant->getChannelSpecialPricings(), $count);
     }
@@ -138,7 +138,7 @@ class SpecialPriceContext implements Context
     /**
      * @Then the :variant variant should have :count special price(s) for channel :channel
      */
-    public function theVariantShouldHaveSpecialPriceForChannel(ProductVariantInterface $variant, int $count, ChannelInterface $channel)
+    public function theVariantShouldHaveSpecialPriceForChannel(ProductVariant $variant, int $count, ChannelInterface $channel)
     {
         Assert::count($variant->getChannelSpecialPricingsForChannel($channel), $count);
     }

@@ -22,12 +22,7 @@
         - { resource: "@Brille24SyliusSpecialPricePlugin/Resources/config/config.yml" }
     ```
 
-4. Update the database schema
-    ```bash
-    bin/console doctrine:schema:update --force
-    ```
-
-[//]: # (4. Override ProductVariant entity
+4. Override ProductVariant entity
     1. Write new class which will use ProductVariantSpecialPricableTrait and implement ProductVariantSpecialPricableInterface
     2. Override the models class in config
         ```yaml
@@ -36,8 +31,54 @@
                 product_variant:
                     classes:
                         model: Brille24\SyliusSpecialPricePlugin\Entity\ProductVariant
-        ```)
+        ```
 
+5. Add mapping and validation
+    1. Mapping
+        ```xml
+        <!-- ProductVariant.orm.xml -->
+ 
+        <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+            <mapped-superclass name="Your\Name\Space\ProductVariant" table="sylius_product_variant">
+                <one-to-many field="channelSpecialPricings"
+                             target-entity="Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface"
+                             mapped-by="productVariant" orphan-removal="true">
+                    <cascade>
+                        <cascade-all/>
+                    </cascade>
+                </one-to-many>
+            </mapped-superclass>
+        </doctrine-mapping>
+        ```
+    2. Validation
+        ```xml
+        <!-- ProductVariant.xml -->
+    
+        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping">
+            <class name="Your\Name\Space\ProductVariant">
+                <constraint
+                        name="Brille24\SyliusSpecialPricePlugin\Validator\ProductVariantChannelSpecialPriceDateOverlapConstraint">
+                    <option name="groups">sylius</option>
+                </constraint>
+            </class>
+        </constraint-mapping>
+        ```
+
+6. Override ```SyliusAdminBundle/ProductVariant/Tab/_details.html.twig```
+    
+    Add this:
+    ```twig
+    <div class="ui segment">
+        {% include 'Brille24SyliusSpecialPricePlugin::_specialPrice.html.twig' with {
+            'form': form.channelSpecialPricings
+        } %}
+    </div>
+    ```
+
+7. Update the database schema
+    ```bash
+    bin/console doctrine:schema:update --force
+    ```
 
 ### Running the test server
 From the plugin root directory, run the following commands:

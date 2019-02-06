@@ -19,3 +19,4 @@ sylius_product:
         product_variant:
             classes:
                 model: Tests\Application\SyliusSpecialPricePlugin\Entity\ProductVariant
+

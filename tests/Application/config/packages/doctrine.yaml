@@ -16,7 +16,7 @@ doctrine:
     orm:
         mappings:
             sylius_product_variant:
-                type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
+                type: xml
+                dir: '%kernel.project_dir%/src/Resources/config/doctrine'
                 is_bundle: false
                 prefix: Tests\Application\SyliusSpecialPricePlugin\Entity

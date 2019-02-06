@@ -11,16 +11,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @Brille24Assert\Brille24\SyliusSpecialPricePlugin\Validator\ProductVariantChannelSpecialPriceDateOverlapConstraint
- */
 trait ProductVariantSpecialPricableTrait
 {
     /**
      * @ORM\OneToMany(
      *     targetEntity="Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface",
      *     mappedBy="productVariant",
-     *     orphanRemoval=true
+     *     orphanRemoval=true,
+     *     cascade={"all"}
      * )
      *
      * @Assert\Valid()

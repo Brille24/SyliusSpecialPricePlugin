@@ -33,6 +33,37 @@
                         model: Brille24\SyliusSpecialPricePlugin\Entity\ProductVariant
         ```
 
+5. Add mapping and validation
+    1. Mapping
+        ```xml
+        <!-- ProductVariant.orm.xml -->
+ 
+        <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+            <mapped-superclass name="Your\Name\Space\ProductVariant" table="sylius_product_variant">
+                <one-to-many field="channelSpecialPricings"
+                             target-entity="Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface"
+                             mapped-by="productVariant" orphan-removal="true">
+                    <cascade>
+                        <cascade-all/>
+                    </cascade>
+                </one-to-many>
+            </mapped-superclass>
+        </doctrine-mapping>
+        ```
+    2. Validation
+        ```xml
+        <!-- ProductVariant.xml -->
+    
+        <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping">
+            <class name="Your\Name\Space\ProductVariant">
+                <constraint
+                        name="Brille24\SyliusSpecialPricePlugin\Validator\ProductVariantChannelSpecialPriceDateOverlapConstraint">
+                    <option name="groups">sylius</option>
+                </constraint>
+            </class>
+        </constraint-mapping>
+        ```
+
 5. Update the database schema
     ```bash
     bin/console doctrine:schema:update --force

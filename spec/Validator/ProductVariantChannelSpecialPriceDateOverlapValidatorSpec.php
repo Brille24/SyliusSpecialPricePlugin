@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace spec\Brille24\SyliusSpecialPricePlugin\Validator;
 
 use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricing;
-use Brille24\SyliusSpecialPricePlugin\Entity\ProductVariantInterface;
 use Brille24\SyliusSpecialPricePlugin\Validator\ProductVariantChannelSpecialPriceDateOverlapConstraint;
 use Brille24\SyliusSpecialPricePlugin\Validator\ProductVariantChannelSpecialPriceDateOverlapValidator;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,6 +13,7 @@ use Prophecy\Argument;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Tests\Application\SyliusSpecialPricePlugin\Entity\ProductVariant;
 
 class ProductVariantChannelSpecialPriceDateOverlapValidatorSpec extends ObjectBehavior
 {
@@ -38,7 +38,7 @@ class ProductVariantChannelSpecialPriceDateOverlapValidatorSpec extends ObjectBe
     }
 
     function it_does_not_add_violation_if_dates_dont_overlap(
-        ProductVariantInterface $productVariant,
+        ProductVariant $productVariant,
         ProductVariantChannelSpecialPriceDateOverlapConstraint $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $violationBuilder
@@ -63,7 +63,7 @@ class ProductVariantChannelSpecialPriceDateOverlapValidatorSpec extends ObjectBe
     }
 
     function it_adds_violation_if_dates_overlap(
-        ProductVariantInterface $productVariant,
+        ProductVariant $productVariant,
         ProductVariantChannelSpecialPriceDateOverlapConstraint $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $violationBuilder

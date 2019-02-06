@@ -6,11 +6,11 @@ namespace spec\Brille24\SyliusSpecialPricePlugin\Calculator;
 
 use Brille24\SyliusSpecialPricePlugin\Calculator\SpecialPriceCalculator;
 use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
-use Brille24\SyliusSpecialPricePlugin\Entity\ProductVariantInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Tests\Application\SyliusSpecialPricePlugin\Entity\ProductVariant;
 
 class SpecialPriceCalculatorSpec extends ObjectBehavior
 {
@@ -31,7 +31,7 @@ class SpecialPriceCalculatorSpec extends ObjectBehavior
     }
 
     function it_uses_active_special_price(
-        ProductVariantInterface $productVariant,
+        ProductVariant $productVariant,
         ChannelSpecialPricingInterface $specialPricing,
         ChannelInterface $channel
     ): void {
@@ -43,7 +43,7 @@ class SpecialPriceCalculatorSpec extends ObjectBehavior
     }
 
     function it_uses_decorated_calculator_if_no_special_price_is_active(
-        ProductVariantInterface $productVariant,
+        ProductVariant $productVariant,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
         ChannelInterface $channel
     ): void {

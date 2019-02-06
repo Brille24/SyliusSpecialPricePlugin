@@ -63,13 +63,19 @@ trait ProductVariantSpecialPricableTrait
     /**
      * {@inheritdoc}
      */
-    public function getChannelSpecialPricingForChannelAndDate(ChannelInterface $channel, \DateTime $dateTime): ?ChannelSpecialPricingInterface
+    public function getChannelSpecialPricingForChannelAndDate(ChannelInterface $channel, ?\DateTime $dateTime = null): ?ChannelSpecialPricingInterface
     {
+        if (null === $dateTime) {
+            $dateTime = new \DateTime('now');
+        }
+
         $specialPricings = $this->getChannelSpecialPricingsForChannel($channel);
 
         /** @var ChannelSpecialPricingInterface $specialPricing */
         foreach ($specialPricings as $specialPricing) {
-            if ($dateTime >= $specialPricing->getStartsAt() && $dateTime < $specialPricing->getEndsAt()) {
+            // Check if $dateTime is between start and end date of the pricing.
+            if ($specialPricing->getStartsAt()->diff($dateTime)->invert === 0 &&
+                $dateTime->diff($specialPricing->getEndsAt())->invert === 0) {
                 return $specialPricing;
             }
         }

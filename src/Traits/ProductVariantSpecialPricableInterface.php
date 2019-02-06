@@ -33,7 +33,7 @@ interface ProductVariantSpecialPricableInterface
      *
      * @return ChannelSpecialPricingInterface|null
      */
-    public function getChannelSpecialPricingForChannelAndDate(ChannelInterface $channel, \DateTime $dateTime): ?ChannelSpecialPricingInterface;
+    public function getChannelSpecialPricingForChannelAndDate(ChannelInterface $channel, ?\DateTime $dateTime = null): ?ChannelSpecialPricingInterface;
 
     /**
      * @param ChannelInterface $channel

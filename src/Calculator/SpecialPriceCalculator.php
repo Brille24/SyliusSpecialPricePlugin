@@ -33,8 +33,7 @@ class SpecialPriceCalculator implements ProductVariantPriceCalculatorInterface
     {
         Assert::keyExists($context, 'channel');
 
-        $currentDate = new \DateTime('now');
-        $specialPricing = $productVariant->getChannelSpecialPricingForChannelAndDate($context['channel'], $currentDate);
+        $specialPricing = $productVariant->getChannelSpecialPricingForChannelAndDate($context['channel']);
 
         if (null === $specialPricing) {
             return $this->productVariantPriceCalculator->calculate($productVariant, $context);

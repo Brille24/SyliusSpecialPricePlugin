@@ -43,8 +43,6 @@ class ProductVariantUpdatePage extends UpdatePage
      */
     public function setPrice(int $price, ChannelInterface $channel): void
     {
-        $this->getDocument()->find('css', sprintf('.menu .item[data-tab="%s"]', $channel->getCode()))->click();
-
         $collection = $this->getDocument()->find('css', sprintf('#sylius_product_variant_channelSpecialPricings_%s', $channel->getCode()));
         $priceFields = $collection->findAll('css', 'input[id$="_price"]');
         $field = end($priceFields);
@@ -58,13 +56,17 @@ class ProductVariantUpdatePage extends UpdatePage
      */
     public function setStartDate(\DateTime $dateTime, ChannelInterface $channel): void
     {
-        $this->getDocument()->find('css', sprintf('.menu .item[data-tab="%s"]', $channel->getCode()))->click();
-
         $collection = $this->getDocument()->find('css', sprintf('#sylius_product_variant_channelSpecialPricings_%s', $channel->getCode()));
         $items = $collection->findAll('css', '[data-form-collection="item"]');
         $item = end($items);
 
-        $item->fillField('Starts at', $dateTime->format('d/m/Y'));
+        $year = $dateTime->format('Y');
+        $month = $dateTime->format('n');
+        $day = $dateTime->format('j');
+
+        $item->find('css', '[id$="startsAt_date_year"]')->setValue($year);
+        $item->find('css', '[id$="startsAt_date_month"]')->setValue($month);
+        $item->find('css', '[id$="startsAt_date_day"]')->setValue($day);
     }
 
     /**
@@ -73,12 +75,26 @@ class ProductVariantUpdatePage extends UpdatePage
      */
     public function setEndDate(\DateTime $dateTime, ChannelInterface $channel): void
     {
-        $this->getDocument()->find('css', sprintf('.menu .item[data-tab="%s"]', $channel->getCode()))->click();
-
         $collection = $this->getDocument()->find('css', sprintf('#sylius_product_variant_channelSpecialPricings_%s', $channel->getCode()));
         $items = $collection->findAll('css', '[data-form-collection="item"]');
         $item = end($items);
 
-        $item->fillField('Ends at', $dateTime->format('d/m/Y'));
+        $year = $dateTime->format('Y');
+        $month = $dateTime->format('n');
+        $day = $dateTime->format('j');
+
+        $item->find('css', '[id$="endsAt_date_year"]')->setValue($year);
+        $item->find('css', '[id$="endsAt_date_month"]')->setValue($month);
+        $item->find('css', '[id$="endsAt_date_day"]')->setValue($day);
+    }
+
+    /**
+     * @return string
+     */
+    public function getSpecialPricesValidationMessage(): string
+    {
+        $element = $this->getDocument()->find('css', '#special_prices .sylius-validation-error');
+
+        return $element->getText();
     }
 }

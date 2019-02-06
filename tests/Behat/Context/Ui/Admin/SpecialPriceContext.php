@@ -5,8 +5,7 @@ namespace Tests\Brille24\SyliusSpecialPricePlugin\Behat\Context\Ui\Admin;
 
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\NotificationType;
-use Sylius\Behat\Service\NotificationCheckerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Tests\Application\SyliusSpecialPricePlugin\Entity\ProductVariant;
@@ -32,20 +31,20 @@ class SpecialPriceContext implements Context
     private $updatePage;
 
     /**
-     * @var NotificationCheckerInterface
+     * @var EntityManagerInterface
      */
-    private $notificationChecker;
+    private $em;
 
     public function __construct(
         ProductVariantCreatePage $createPage,
         ProductVariantUpdatePage $updatePage,
         CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
+        EntityManagerInterface $em
     ) {
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
-        $this->notificationChecker = $notificationChecker;
+        $this->em = $em;
     }
 
     /**
@@ -68,14 +67,6 @@ class SpecialPriceContext implements Context
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->removeSpecialPriceForChannel($channel);
-    }
-
-    /**
-     * @Then I should be notified that the price field cannot be empty
-     */
-    public function iShouldBeNotifiedThatThePriceFieldCannotBeEmpty()
-    {
-        $this->notificationChecker->checkNotification('This value should not be null.', NotificationType::failure());
     }
 
     /**
@@ -116,7 +107,10 @@ class SpecialPriceContext implements Context
      */
     public function iShouldBeNotifiedThatTheStartDateMustBeSmallerThanTheEndDate()
     {
-        $this->notificationChecker->checkNotification('brille24.product_variant.channel_special_pricing.start_before_end', NotificationType::failure());
+        /** @var ProductVariantCreatePage|ProductVariantUpdatePage $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same($currentPage->getSpecialPricesValidationMessage(), 'The start date must be smaller than the end date.');
     }
 
     /**
@@ -124,7 +118,21 @@ class SpecialPriceContext implements Context
      */
     public function iShouldBeNotifiedThatTheDatesCannotOverlap()
     {
-        $this->notificationChecker->checkNotification('brille24.product_variant.channel_special_pricing.dates_overlap', NotificationType::failure());
+        /** @var ProductVariantCreatePage|ProductVariantUpdatePage $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same($currentPage->getSpecialPricesValidationMessage(), 'The date ranges should not overlap.');
+    }
+
+    /**
+     * @Then I should be notified that the price field cannot be empty
+     */
+    public function iShouldBeNotifiedThatThePriceFieldCannotBeEmpty()
+    {
+        /** @var ProductVariantCreatePage|ProductVariantUpdatePage $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same($currentPage->getSpecialPricesValidationMessage(), 'This value should not be null.');
     }
 
     /**
@@ -132,6 +140,9 @@ class SpecialPriceContext implements Context
      */
     public function theVariantShouldHaveSpecialPrices(ProductVariant $variant, int $count)
     {
+        // The product variant is loaded from cache, therefore we have to refresh it manually.
+        $this->em->refresh($variant);
+
         Assert::count($variant->getChannelSpecialPricings(), $count);
     }
 
@@ -140,6 +151,9 @@ class SpecialPriceContext implements Context
      */
     public function theVariantShouldHaveSpecialPriceForChannel(ProductVariant $variant, int $count, ChannelInterface $channel)
     {
+        // The product variant is loaded from cache, therefore we have to refresh it manually.
+        $this->em->refresh($variant);
+
         Assert::count($variant->getChannelSpecialPricingsForChannel($channel), $count);
     }
 }

@@ -19,7 +19,7 @@
             <argument type="service"
                       id="tests.brille24.sylius_special_price_plugin.behat.page.admin.product_variant_update_page"/>
             <argument type="service" id="sylius.behat.current_page_resolver"/>
-            <argument type="service" id="sylius.behat.notification_checker"/>
+            <argument type="service" id="__symfony__.doctrine.orm.default_entity_manager"/>
 
         </service>
 

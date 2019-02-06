@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-trait ProductVariantSpecialPricableTrait
+trait ProductVariantSpecialPriceableTrait
 {
     /**
      * @ORM\OneToMany(

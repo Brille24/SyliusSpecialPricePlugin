@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Calculator;
 
-use Brille24\SyliusSpecialPricePlugin\Traits\ProductVariantSpecialPricableInterface;
+use Brille24\SyliusSpecialPricePlugin\Traits\ProductVariantSpecialPriceableInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface as SyliusProductVariantInterface;
 use Webmozart\Assert\Assert;
@@ -22,7 +22,7 @@ class SpecialPriceCalculator implements ProductVariantPriceCalculatorInterface
     }
 
     /**
-     * @param ProductVariantSpecialPricableInterface $productVariant
+     * @param ProductVariantSpecialPriceableInterface $productVariant
      * @param array $context
      *
      * @return int

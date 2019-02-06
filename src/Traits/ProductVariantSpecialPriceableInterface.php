@@ -8,7 +8,7 @@ use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-interface ProductVariantSpecialPricableInterface
+interface ProductVariantSpecialPriceableInterface
 {
     /**
      * @return Collection

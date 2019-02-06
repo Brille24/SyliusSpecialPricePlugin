@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Brille24\SyliusSpecialPricePlugin\Form\Extension;
 
 use Brille24\SyliusSpecialPricePlugin\Form\Type\ChannelSpecialPricingType;
-use Brille24\SyliusSpecialPricePlugin\Traits\ProductVariantSpecialPricableInterface;
+use Brille24\SyliusSpecialPricePlugin\Traits\ProductVariantSpecialPriceableInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -23,7 +23,7 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
-            /** @var ProductVariantSpecialPricableInterface|null $productVariant */
+            /** @var ProductVariantSpecialPriceableInterface|null $productVariant */
             $productVariant = $event->getData();
 
             $event->getForm()->add('channelSpecialPricings', ChannelCollectionType::class, [
@@ -51,7 +51,7 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
 
         // Since the channelSpecialPricings form isn't mapped, we have to update the collection manually.
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void {
-            /** @var ProductVariantSpecialPricableInterface $productVariant */
+            /** @var ProductVariantSpecialPriceableInterface $productVariant */
             $productVariant = $event->getData();
             $formSpecialPricings = $event->getForm()->get('channelSpecialPricings')->getData();
 

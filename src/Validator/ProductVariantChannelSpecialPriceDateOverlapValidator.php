@@ -13,7 +13,7 @@ class ProductVariantChannelSpecialPriceDateOverlapValidator extends ConstraintVa
 {
     /**
      * @param ProductVariantSpecialPriceableInterface $productVariant
-     * @param Constraint $constraint
+     * @param ProductVariantChannelSpecialPriceDateOverlapConstraint $constraint
      */
     public function validate($productVariant, Constraint $constraint)
     {

@@ -13,7 +13,7 @@ class ChannelPricingDateValidator extends ConstraintValidator
 {
     /**
      * @param ChannelSpecialPricingInterface $channelSpecialPricing
-     * @param Constraint $constraint
+     * @param ChannelPricingDateConstraint $constraint
      */
     public function validate($channelSpecialPricing, Constraint $constraint)
     {

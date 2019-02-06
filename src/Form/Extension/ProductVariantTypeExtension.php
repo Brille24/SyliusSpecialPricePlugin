@@ -23,7 +23,7 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
-            /** @var ProductVariantSpecialPriceableInterface|null $productVariant */
+            /** @var ProductVariantSpecialPriceableInterface $productVariant */
             $productVariant = $event->getData();
 
             $event->getForm()->add('channelSpecialPricings', ChannelCollectionType::class, [

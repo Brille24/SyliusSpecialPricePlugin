@@ -14,27 +14,27 @@ class ChannelSpecialPricing implements ChannelSpecialPricingInterface
     protected $id;
 
     /**
-     * @var ProductVariantInterface
+     * @var ProductVariantInterface|null
      */
     protected $productVariant;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $price;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $channelCode;
 
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      */
     protected $startsAt;
 
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      */
     protected $endsAt;
 

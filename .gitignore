@@ -6,3 +6,6 @@
 !/etc/build/.gitignore
 
 /tests/Application/yarn.lock
+
+# PHP-Storm
+.idea/

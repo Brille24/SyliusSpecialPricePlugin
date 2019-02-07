@@ -22,7 +22,10 @@
         - { resource: "@Brille24SyliusSpecialPricePlugin/Resources/config/config.yml" }
     ```
 
-4. Override ProductVariant entity
+4. Add migrations
+	1. Copy migrations from `tests/Application/migration` to your desired spot for migrations.
+
+5. Override ProductVariant entity
     1. Write new class which will use ProductVariantSpecialPricableTrait and implement ProductVariantSpecialPricableInterface
     2. Override the models class in config
         ```yaml
@@ -33,7 +36,7 @@
                         model: Brille24\SyliusSpecialPricePlugin\Entity\ProductVariant
         ```
 
-5. Add mapping and validation
+6. Add mapping and validation
     1. Mapping
         ```xml
         <!-- ProductVariant.orm.xml -->

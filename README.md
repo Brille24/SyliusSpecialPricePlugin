@@ -1,6 +1,8 @@
 # Sylius Special Price Plugin
 [![Build Status](https://travis-ci.org/Brille24/SyliusSpecialPricePlugin.svg?branch=master)](https://travis-ci.org/Brille24/SyliusSpecialPricePlugin)
 
+This plugin provides a configuration for prices that are just active within a certain date range. So if you want to change the price for a product between the 1st May and the 1st of April, this plugin is for you.
+
 ### Installation
 1. Require the plugin
     ```bash

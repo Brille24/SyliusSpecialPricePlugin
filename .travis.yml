@@ -27,9 +27,6 @@ before_install:
     - mkdir -p "${SYLIUS_CACHE_DIR}"
     - mkdir -p tests/Application/web/media/image
 
-    - cp tests/Application/.env.test.dist tests/Application/.env.test
-    - set -a && source tests/Application/.env.test && set +a
-
 install:
     - composer require "symfony/browser-kit:${SYMFONY_VERSION}" --no-interaction --no-update
     - composer require "symfony/debug-bundle:${SYMFONY_VERSION}" --no-interaction --no-update

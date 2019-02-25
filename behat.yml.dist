@@ -9,7 +9,14 @@ default:
                 - vendor/sylius/sylius/src/Sylius/Behat/Resources/config/services.xml
                 - tests/Behat/Resources/services.xml
 
-        FriendsOfBehat\SymfonyExtension: ~
+        FriendsOfBehat\SymfonyExtension:
+            env_file: tests/Application/.env.test
+            bootstrap: tests/Application/config/bootstrap.php
+            kernel:
+            kernel:
+                env: test
+                debug: true
+                class: Tests\Brille24\SyliusSpecialPricePlugin\Application\Kernel
 
         FriendsOfBehat\VariadicExtension: ~
 

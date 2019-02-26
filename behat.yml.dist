@@ -8,7 +8,6 @@ default:
             env_file: tests/Application/.env.test
             bootstrap: tests/Application/config/bootstrap.php
             kernel:
-            kernel:
                 env: test
                 debug: true
                 class: Tests\Brille24\SyliusSpecialPricePlugin\Application\Kernel

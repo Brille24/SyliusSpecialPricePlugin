@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
     <services>
         <!-- Put your Behat services here -->
-        <defaults public="true" />
-
         <service class="Tests\Brille24\SyliusSpecialPricePlugin\Behat\Context\Setup\SpecialPriceContext"
                  id="brille24.sylius_special_price_plugin.behat.context.setup.special_price_context">
             <argument type="service" id="brille24.factory.channel_special_pricing"/>
@@ -25,14 +26,12 @@
         <service class="Tests\Brille24\SyliusSpecialPricePlugin\Behat\Page\Admin\ProductVariantCreatePage"
                  id="tests.brille24.sylius_special_price_plugin.behat.page.admin.product_variant_create_page"
                  parent="sylius.behat.page.admin.product_variant.create"
-        >
-        </service>
+                 public="false"/>
 
         <service class="Tests\Brille24\SyliusSpecialPricePlugin\Behat\Page\Admin\ProductVariantUpdatePage"
                  id="tests.brille24.sylius_special_price_plugin.behat.page.admin.product_variant_update_page"
                  parent="sylius.behat.page.admin.product_variant.update"
-        >
-        </service>
-
+                 public="false"/>
     </services>
+
 </container>

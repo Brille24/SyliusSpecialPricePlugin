@@ -5,27 +5,17 @@ imports:
 default:
     extensions:
         FriendsOfBehat\SymfonyExtension:
-            env_file: tests/Application/.env.test
             bootstrap: tests/Application/config/bootstrap.php
             kernel:
-                env: test
-                debug: true
                 class: Tests\Brille24\SyliusSpecialPricePlugin\Application\Kernel
 
         FriendsOfBehat\VariadicExtension: ~
 
         FriendsOfBehat\SuiteSettingsExtension:
             paths:
-                - "vendor/sylius/sylius/features"
                 - "features"
 
         Lakion\Behat\MinkDebugExtension:
             directory: etc/build
             clean_start: false
             screenshot: true
-            env_file: .env.test_cached
-    gherkin:
-        filters:
-            kernel:
-            env_file: .env.test_cached
-            tags: "~@todo && ~@cli" # CLI is excluded as it registers an error handler that mutes fatal errors

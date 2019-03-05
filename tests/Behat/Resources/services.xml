@@ -5,15 +5,19 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <defaults public="true"/>
+
         <!-- Put your Behat services here -->
         <service class="Tests\Brille24\SyliusSpecialPricePlugin\Behat\Context\Setup\SpecialPriceContext"
-                 id="brille24.sylius_special_price_plugin.behat.context.setup.special_price_context">
+                 id="brille24.sylius_special_price_plugin.behat.context.setup.special_price_context"
+        >
             <argument type="service" id="brille24.factory.channel_special_pricing"/>
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
 
         <service class="Tests\Brille24\SyliusSpecialPricePlugin\Behat\Context\Ui\Admin\SpecialPriceContext"
-                 id="brille24.sylius_special_price_plugin.behat.context.ui.admin.special_price_context">
+                 id="brille24.sylius_special_price_plugin.behat.context.ui.admin.special_price_context"
+        >
             <argument type="service"
                       id="tests.brille24.sylius_special_price_plugin.behat.page.admin.product_variant_create_page"/>
             <argument type="service"
@@ -26,12 +30,14 @@
         <service class="Tests\Brille24\SyliusSpecialPricePlugin\Behat\Page\Admin\ProductVariantCreatePage"
                  id="tests.brille24.sylius_special_price_plugin.behat.page.admin.product_variant_create_page"
                  parent="sylius.behat.page.admin.product_variant.create"
-                 public="false"/>
+                 public="false"
+        />
 
         <service class="Tests\Brille24\SyliusSpecialPricePlugin\Behat\Page\Admin\ProductVariantUpdatePage"
                  id="tests.brille24.sylius_special_price_plugin.behat.page.admin.product_variant_update_page"
                  parent="sylius.behat.page.admin.product_variant.update"
-                 public="false"/>
+                 public="false"
+        />
     </services>
 
 </container>

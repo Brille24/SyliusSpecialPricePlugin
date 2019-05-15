@@ -6,20 +6,18 @@
 
         <service class="Tests\Brille24\SyliusSpecialPricePlugin\Behat\Context\Setup\SpecialPriceContext"
                  id="brille24.sylius_special_price_plugin.behat.context.setup.special_price_context">
-            <tag name="fob.context_service" />
-            <argument type="service" id="__symfony__.brille24.factory.channel_special_pricing"/>
-            <argument type="service" id="__symfony__.doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="brille24.factory.channel_special_pricing"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
         </service>
 
         <service class="Tests\Brille24\SyliusSpecialPricePlugin\Behat\Context\Ui\Admin\SpecialPriceContext"
                  id="brille24.sylius_special_price_plugin.behat.context.ui.admin.special_price_context">
-            <tag name="fob.context_service" />
             <argument type="service"
                       id="tests.brille24.sylius_special_price_plugin.behat.page.admin.product_variant_create_page"/>
             <argument type="service"
                       id="tests.brille24.sylius_special_price_plugin.behat.page.admin.product_variant_update_page"/>
             <argument type="service" id="sylius.behat.current_page_resolver"/>
-            <argument type="service" id="__symfony__.doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
 
         </service>
 

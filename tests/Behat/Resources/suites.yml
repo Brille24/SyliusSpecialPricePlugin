@@ -2,7 +2,7 @@
 default:
     suites:
         ui_admin_special_prices:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.setup.channel
@@ -30,7 +30,7 @@ default:
                 tags: "@admin && @special_prices && @ui"
 
         ui_shop_special_prices:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.setup.channel

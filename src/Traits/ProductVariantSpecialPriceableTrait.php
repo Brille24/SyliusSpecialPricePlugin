@@ -73,9 +73,24 @@ trait ProductVariantSpecialPriceableTrait
 
         /** @var ChannelSpecialPricingInterface $specialPricing */
         foreach ($specialPricings as $specialPricing) {
+            // Account for null start and end
+            if ($specialPricing->getStartsAt() === null && $specialPricing->getEndsAt() === null) {
+                return $specialPricing;
+            }
+
+            // Account for null start
+            if ($specialPricing->getStartsAt() === null && $dateTime < $specialPricing->getEndsAt()) {
+                return $specialPricing;
+            }
+
+            // Account for null end
+            if ($specialPricing->getEndsAt() === null && $dateTime >= $specialPricing->getStartsAt()) {
+                return $specialPricing;
+            }
+
             // Check if $dateTime is between start and end date of the pricing.
-            if ($specialPricing->getStartsAt()->diff($dateTime)->invert === 0 &&
-                $dateTime->diff($specialPricing->getEndsAt())->invert === 0) {
+            if ($dateTime >= $specialPricing->getStartsAt() &&
+                $dateTime < $specialPricing->getEndsAt()) {
                 return $specialPricing;
             }
         }

@@ -28,7 +28,7 @@ class ProductVariantChannelSpecialPriceDateOverlapValidator extends ConstraintVa
             // Check for all specialPrices, if their dates overlap.
             foreach ($specialPrices as $a) {
                 foreach ($specialPrices as $b) {
-                    if (!$this->datesOk($a, $b)) {
+                    if ($this->datesOverlap($a, $b)) {
                         $this->context->buildViolation($constraint->message)
                             ->atPath('channelSpecialPricings')
                             ->addViolation()
@@ -47,14 +47,50 @@ class ProductVariantChannelSpecialPriceDateOverlapValidator extends ConstraintVa
      *
      * @return bool
      */
-    private function datesOk(ChannelSpecialPricingInterface $a, ChannelSpecialPricingInterface $b): bool
+    private function datesOverlap(ChannelSpecialPricingInterface $a, ChannelSpecialPricingInterface $b): bool
     {
+        // Don't compare a pricing with itself
         if ($a === $b) {
+            return false;
+        }
+
+        if ($this->overlapWithNullValues($a, $b) || $this->overlapWithNullValues($b, $a)) {
             return true;
         }
 
-        if ($a->getStartsAt() > $b->getEndsAt() || $a->getEndsAt() < $b->getStartsAt()) {
+        // All dates are DateTime objects
+        if (!($a->getStartsAt() > $b->getEndsAt() || $a->getEndsAt() < $b->getStartsAt())) {
             return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param ChannelSpecialPricingInterface $a
+     * @param ChannelSpecialPricingInterface $b
+     *
+     * @return bool
+     */
+    private function overlapWithNullValues(ChannelSpecialPricingInterface $a, ChannelSpecialPricingInterface $b): bool
+    {
+        // Both dates null = always active
+        if ($a->getStartsAt() === null && $a->getEndsAt() === null) {
+            return true;
+        }
+
+        // Start null = active till end
+        if ($a->getStartsAt() === null) {
+            if ($b->getStartsAt() < $a->getEndsAt() || $b->getEndsAt() < $a->getEndsAt()) {
+                return true;
+            }
+        }
+
+        // End null = active since start
+        if ($a->getEndsAt() === null) {
+            if ($b->getStartsAt() > $a->getStartsAt() || $b->getEndsAt() > $a->getStartsAt()) {
+                return true;
+            }
         }
 
         return false;

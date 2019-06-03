@@ -67,6 +67,12 @@ class ProductVariantCreatePage extends CreatePage
         $item->find('css', '[id$="startsAt_date_year"]')->setValue($year);
         $item->find('css', '[id$="startsAt_date_month"]')->setValue($month);
         $item->find('css', '[id$="startsAt_date_day"]')->setValue($day);
+
+        $hour = $dateTime->format('h');
+        $minute = $dateTime->format('m');
+
+        $item->find('css', '[id$="startsAt_time_hour"]')->setValue($hour);
+        $item->find('css', '[id$="startsAt_time_minute"]')->setValue($minute);
     }
 
     /**
@@ -86,6 +92,12 @@ class ProductVariantCreatePage extends CreatePage
         $item->find('css', '[id$="endsAt_date_year"]')->setValue($year);
         $item->find('css', '[id$="endsAt_date_month"]')->setValue($month);
         $item->find('css', '[id$="endsAt_date_day"]')->setValue($day);
+
+        $hour = $dateTime->format('h');
+        $minute = $dateTime->format('m');
+
+        $item->find('css', '[id$="endsAt_time_hour"]')->setValue($hour);
+        $item->find('css', '[id$="endsAt_time_minute"]')->setValue($minute);
     }
 
     /**

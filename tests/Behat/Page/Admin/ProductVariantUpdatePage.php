@@ -60,13 +60,19 @@ class ProductVariantUpdatePage extends UpdatePage
         $items = $collection->findAll('css', '[data-form-collection="item"]');
         $item = end($items);
 
-        $year = $dateTime->format('Y');
-        $month = $dateTime->format('n');
-        $day = $dateTime->format('j');
+        $year = (int) $dateTime->format('Y');
+        $month = (int) $dateTime->format('n');
+        $day = (int) $dateTime->format('j');
 
         $item->find('css', '[id$="startsAt_date_year"]')->setValue($year);
         $item->find('css', '[id$="startsAt_date_month"]')->setValue($month);
         $item->find('css', '[id$="startsAt_date_day"]')->setValue($day);
+
+        $hour = (int) $dateTime->format('G');
+        $minute = (int) $dateTime->format('i');
+
+        $item->find('css', '[id$="startsAt_time_hour"]')->setValue($hour);
+        $item->find('css', '[id$="startsAt_time_minute"]')->setValue($minute);
     }
 
     /**
@@ -79,13 +85,19 @@ class ProductVariantUpdatePage extends UpdatePage
         $items = $collection->findAll('css', '[data-form-collection="item"]');
         $item = end($items);
 
-        $year = $dateTime->format('Y');
-        $month = $dateTime->format('n');
-        $day = $dateTime->format('j');
+        $year = (int) $dateTime->format('Y');
+        $month = (int) $dateTime->format('n');
+        $day = (int) $dateTime->format('j');
 
         $item->find('css', '[id$="endsAt_date_year"]')->setValue($year);
         $item->find('css', '[id$="endsAt_date_month"]')->setValue($month);
         $item->find('css', '[id$="endsAt_date_day"]')->setValue($day);
+
+        $hour = (int) $dateTime->format('G');
+        $minute = (int) $dateTime->format('i');
+
+        $item->find('css', '[id$="endsAt_time_hour"]')->setValue($hour);
+        $item->find('css', '[id$="endsAt_time_minute"]')->setValue($minute);
     }
 
     /**

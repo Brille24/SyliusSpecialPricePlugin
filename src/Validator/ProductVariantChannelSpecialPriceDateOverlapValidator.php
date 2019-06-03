@@ -59,7 +59,7 @@ class ProductVariantChannelSpecialPriceDateOverlapValidator extends ConstraintVa
         }
 
         // All dates are DateTime objects
-        if (!($a->getStartsAt() > $b->getEndsAt() || $a->getEndsAt() < $b->getStartsAt())) {
+        if (!($a->getStartsAt() >= $b->getEndsAt() || $a->getEndsAt() <= $b->getStartsAt())) {
             return true;
         }
 

@@ -19,6 +19,11 @@ class ChannelPricingDateValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($constraint, ChannelPricingDateConstraint::class);
 
+        // If either start or end is open, the date is valid.
+        if (null === $channelSpecialPricing->getStartsAt() || null === $channelSpecialPricing->getEndsAt()) {
+            return;
+        }
+
         if ($channelSpecialPricing->getStartsAt() > $channelSpecialPricing->getEndsAt()) {
             $this->context->buildViolation($constraint->message)
                 ->atPath('startsAt')

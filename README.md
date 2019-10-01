@@ -102,3 +102,5 @@ From the plugin root directory, run the following commands:
 
 ### Testing
 In order to run the phpspec tests you need to run the command `vendor/bin/phpspec run`
+In order to run the phpunit tests you need to run the command `vendor/bin/phpunit`
+In order to run the behat tests you need to run the command `vendor/bin/behat`

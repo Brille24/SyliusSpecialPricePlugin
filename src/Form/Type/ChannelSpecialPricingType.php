@@ -28,10 +28,14 @@ class ChannelSpecialPricingType extends AbstractResourceType
             ->add('startsAt', DateTimeType::class, [
                 'label'    => 'brille24.form.channel_special_price.starts_at',
                 'required' => false,
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
             ])
             ->add('endsAt', DateTimeType::class, [
                 'label'    => 'brille24.form.channel_special_price.ends_at',
                 'required' => false,
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
             ])
         ;
 

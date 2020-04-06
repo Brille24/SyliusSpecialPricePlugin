@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\Brille24\SyliusSpecialPricePlugin\Behat\Page\Admin;
 
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Admin\ProductVariant\CreatePage;
 use Sylius\Component\Core\Model\ChannelInterface;
 
@@ -60,19 +61,10 @@ class ProductVariantCreatePage extends CreatePage
         $items = $collection->findAll('css', '[data-form-collection="item"]');
         $item = end($items);
 
-        $year = $dateTime->format('Y');
-        $month = $dateTime->format('n');
-        $day = $dateTime->format('j');
+        $timeStamp = $dateTime->getTimestamp();
 
-        $item->find('css', '[id$="startsAt_date_year"]')->setValue($year);
-        $item->find('css', '[id$="startsAt_date_month"]')->setValue($month);
-        $item->find('css', '[id$="startsAt_date_day"]')->setValue($day);
-
-        $hour = $dateTime->format('h');
-        $minute = $dateTime->format('m');
-
-        $item->find('css', '[id$="startsAt_time_hour"]')->setValue($hour);
-        $item->find('css', '[id$="startsAt_time_minute"]')->setValue($minute);
+        $item->find('css', '[id$="startsAt_date"]')->setValue(date('Y-m-d', $timeStamp));
+        $item->find('css', '[id$="startsAt_time"]')->setValue(date('H:i', $timeStamp));
     }
 
     /**
@@ -85,19 +77,10 @@ class ProductVariantCreatePage extends CreatePage
         $items = $collection->findAll('css', '[data-form-collection="item"]');
         $item = end($items);
 
-        $year = $dateTime->format('Y');
-        $month = $dateTime->format('n');
-        $day = $dateTime->format('j');
+        $timeStamp = $dateTime->getTimestamp();
 
-        $item->find('css', '[id$="endsAt_date_year"]')->setValue($year);
-        $item->find('css', '[id$="endsAt_date_month"]')->setValue($month);
-        $item->find('css', '[id$="endsAt_date_day"]')->setValue($day);
-
-        $hour = $dateTime->format('h');
-        $minute = $dateTime->format('m');
-
-        $item->find('css', '[id$="endsAt_time_hour"]')->setValue($hour);
-        $item->find('css', '[id$="endsAt_time_minute"]')->setValue($minute);
+        $item->find('css', '[id$="endsAt_date"]')->setValue(date('Y-m-d', $timeStamp));
+        $item->find('css', '[id$="endsAt_time"]')->setValue(date('H:i', $timeStamp));
     }
 
     /**

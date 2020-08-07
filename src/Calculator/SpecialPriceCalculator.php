@@ -42,6 +42,7 @@ class SpecialPriceCalculator implements ProductVariantPriceCalculatorInterface
 
         $price = $specialPricing->getPrice();
         Assert::notNull($price);
+
         return $price;
     }
 }

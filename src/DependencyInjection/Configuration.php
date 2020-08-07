@@ -15,7 +15,7 @@ final class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('brille24_sylius_special_price_plugin');
+        $rootNode    = $treeBuilder->root('brille24_sylius_special_price_plugin');
 
         return $treeBuilder;
     }

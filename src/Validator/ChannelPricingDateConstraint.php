@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraint;
 
 class ChannelPricingDateConstraint extends Constraint
 {
+    /** @var string */
     public $message = 'brille24.product_variant.channel_special_pricing.start_before_end';
 
     public function validatedBy()

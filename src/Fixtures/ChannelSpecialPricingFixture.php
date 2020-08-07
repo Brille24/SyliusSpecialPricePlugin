@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Fixtures;
 
-
 use Sylius\Bundle\CoreBundle\Fixture\AbstractResourceFixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 

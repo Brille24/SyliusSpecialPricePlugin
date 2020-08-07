@@ -15,7 +15,7 @@ class ChannelPricingDateValidator extends ConstraintValidator
      * @param ChannelSpecialPricingInterface $channelSpecialPricing
      * @param ChannelPricingDateConstraint $constraint
      */
-    public function validate($channelSpecialPricing, Constraint $constraint)
+    public function validate($channelSpecialPricing, Constraint $constraint): void
     {
         Assert::isInstanceOf($constraint, ChannelPricingDateConstraint::class);
 

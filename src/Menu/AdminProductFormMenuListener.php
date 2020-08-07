@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Menu;
 
-
 use Sylius\Bundle\AdminBundle\Event\ProductMenuBuilderEvent;
 
 final class AdminProductFormMenuListener

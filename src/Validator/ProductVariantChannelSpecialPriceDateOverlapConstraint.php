@@ -8,9 +8,7 @@ use Symfony\Component\Validator\Constraint;
 
 class ProductVariantChannelSpecialPriceDateOverlapConstraint extends Constraint
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     public $message = 'brille24.product_variant.channel_special_pricing.dates_overlap';
 
     /**

@@ -15,7 +15,7 @@ class ProductVariantChannelSpecialPriceDateOverlapValidator extends ConstraintVa
      * @param ProductVariantSpecialPriceableInterface $productVariant
      * @param ProductVariantChannelSpecialPriceDateOverlapConstraint $constraint
      */
-    public function validate($productVariant, Constraint $constraint)
+    public function validate($productVariant, Constraint $constraint): void
     {
         $specialPricesByChannel = [];
 

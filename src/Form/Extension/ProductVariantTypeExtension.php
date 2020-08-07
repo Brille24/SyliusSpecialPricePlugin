@@ -20,29 +20,29 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
             /** @var ProductVariantSpecialPriceableInterface $productVariant */
             $productVariant = $event->getData();
 
             $event->getForm()->add('channelSpecialPricings', ChannelCollectionType::class, [
-                'mapped' => false,
-                'entry_type' => CollectionType::class,
+                'mapped'        => false,
+                'entry_type'    => CollectionType::class,
                 'entry_options' => function (ChannelInterface $channel) use ($productVariant) {
                     // Get all special prices by channel
                     $specialPrices = $productVariant->getChannelSpecialPricingsForChannel($channel);
 
                     return [
-                        'entry_type' => ChannelSpecialPricingType::class,
+                        'entry_type'    => ChannelSpecialPricingType::class,
                         'entry_options' => [
-                            'channel' => $channel,
+                            'channel'         => $channel,
                             'product_variant' => $productVariant,
-                            'required' => false,
+                            'required'        => false,
                         ],
-                        'allow_add' => true,
+                        'allow_add'    => true,
                         'allow_delete' => true,
-                        'data' => $specialPrices,
+                        'data'         => $specialPrices,
                     ];
                 },
                 'label' => 'brille24.form.channel_special_price.special_prices',
@@ -73,8 +73,8 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
         });
     }
 
-    public function getExtendedType()
+    public function getExtendedTypes(): array
     {
-        return ProductVariantType::class;
+        return [ProductVariantType::class];
     }
 }

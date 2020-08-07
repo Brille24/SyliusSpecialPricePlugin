@@ -18,19 +18,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ChannelSpecialPricingType extends AbstractResourceType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('price', MoneyType::class, [
-                'label' => 'brille24.form.channel_special_price.price',
+                'label'    => 'brille24.form.channel_special_price.price',
                 'currency' => $options['channel']->getBaseCurrency()->getCode(),
             ])
             ->add('startsAt', DateTimeType::class, [
-                'label' => 'brille24.form.channel_special_price.starts_at',
+                'label'    => 'brille24.form.channel_special_price.starts_at',
                 'required' => false,
             ])
             ->add('endsAt', DateTimeType::class, [
-                'label' => 'brille24.form.channel_special_price.ends_at',
+                'label'    => 'brille24.form.channel_special_price.ends_at',
                 'required' => false,
             ])
         ;
@@ -73,7 +73,7 @@ class ChannelSpecialPricingType extends AbstractResourceType
         ;
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'brille24_channel_special_pricing';
     }

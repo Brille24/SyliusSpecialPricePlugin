@@ -81,14 +81,14 @@ class ProductVariantChannelSpecialPriceDateOverlapValidator extends ConstraintVa
 
         // Start null = active till end
         if ($a->getStartsAt() === null) {
-            if ($b->getStartsAt() < $a->getEndsAt() || $b->getEndsAt() < $a->getEndsAt()) {
+            if ($b->getStartsAt() < $a->getEndsAt()) {
                 return true;
             }
         }
 
         // End null = active since start
         if ($a->getEndsAt() === null) {
-            if ($b->getStartsAt() > $a->getStartsAt() || $b->getEndsAt() > $a->getStartsAt()) {
+            if ($b->getEndsAt() > $a->getStartsAt()) {
                 return true;
             }
         }

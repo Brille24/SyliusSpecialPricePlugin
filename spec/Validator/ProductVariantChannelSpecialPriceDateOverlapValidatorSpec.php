@@ -7,6 +7,7 @@ namespace spec\Brille24\SyliusSpecialPricePlugin\Validator;
 use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricing;
 use Brille24\SyliusSpecialPricePlugin\Validator\ProductVariantChannelSpecialPriceDateOverlapConstraint;
 use Brille24\SyliusSpecialPricePlugin\Validator\ProductVariantChannelSpecialPriceDateOverlapValidator;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -17,7 +18,7 @@ use Tests\Application\SyliusSpecialPricePlugin\Entity\ProductVariant;
 
 class ProductVariantChannelSpecialPriceDateOverlapValidatorSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $violationBuilder
     ): void {
@@ -27,63 +28,85 @@ class ProductVariantChannelSpecialPriceDateOverlapValidatorSpec extends ObjectBe
         $this->initialize($context);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(ProductVariantChannelSpecialPriceDateOverlapValidator::class);
     }
 
-    function it_is_a_validator()
+    public function it_is_a_validator()
     {
         $this->shouldBeAnInstanceOf(ConstraintValidator::class);
     }
 
-    function it_does_not_add_violation_if_dates_dont_overlap(
+    public function it_does_not_add_violation_if_dates_dont_overlap(
         ProductVariant $productVariant,
         ProductVariantChannelSpecialPriceDateOverlapConstraint $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $violationBuilder
     ): void {
-        $firstPrice = new ChannelSpecialPricing();
-        $firstPrice->setStartsAt(new \DateTime('2 days ago'));
-        $firstPrice->setEndsAt(new \DateTime('yesterday'));
-        $firstPrice->setChannelCode('FIRST');
+        foreach ($this->notOverlappingDatesProvider() as $dates) {
+            $productVariant->getChannelSpecialPricings()->willReturn(new ArrayCollection($this->getChannelPrices($dates)));
 
-        $secondPrice = new ChannelSpecialPricing();
-        $secondPrice->setStartsAt(new \DateTime('now'));
-        $secondPrice->setEndsAt(new \DateTime('tomorrow'));
-        $secondPrice->setChannelCode('FIRST');
+            $context->buildViolation(Argument::any())->shouldNotBeCalled();
+            $violationBuilder->atPath(Argument::any())->shouldNotBeCalled();
+            $violationBuilder->addViolation()->shouldNotBeCalled();
 
-        $productVariant->getChannelSpecialPricings()->willReturn(new ArrayCollection([$firstPrice, $secondPrice]));
-
-        $context->buildViolation(Argument::any())->shouldNotBeCalled();
-        $violationBuilder->atPath(Argument::any())->shouldNotBeCalled();
-        $violationBuilder->addViolation()->shouldNotBeCalled();
-
-        $this->validate($productVariant, $constraint);
+            $this->validate($productVariant, $constraint);
+        }
     }
 
-    function it_adds_violation_if_dates_overlap(
+    public function it_adds_violation_if_dates_overlap(
         ProductVariant $productVariant,
         ProductVariantChannelSpecialPriceDateOverlapConstraint $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $violationBuilder
     ): void {
+        foreach ($this->overlappingDatesProvider() as $dates) {
+            $productVariant->getChannelSpecialPricings()->willReturn(new ArrayCollection($this->getChannelPrices($dates)));
+
+            $context->buildViolation(Argument::any())->shouldBeCalled();
+            $violationBuilder->atPath(Argument::any())->shouldBeCalled();
+            $violationBuilder->addViolation()->shouldBeCalled();
+
+            $this->validate($productVariant, $constraint);
+        }
+    }
+
+    private function getChannelPrices(array $dates): array
+    {
+        [$firstStart, $firstEnd, $secondStart, $secondEnd] = $dates;
+
         $firstPrice = new ChannelSpecialPricing();
-        $firstPrice->setStartsAt(new \DateTime('2 days ago'));
-        $firstPrice->setEndsAt(new \DateTime('tomorrow'));
+        $firstPrice->setStartsAt($firstStart);
+        $firstPrice->setEndsAt($firstEnd);
         $firstPrice->setChannelCode('FIRST');
 
         $secondPrice = new ChannelSpecialPricing();
-        $secondPrice->setStartsAt(new \DateTime('now'));
-        $secondPrice->setEndsAt(new \DateTime('tomorrow'));
+        $secondPrice->setStartsAt($secondStart);
+        $secondPrice->setEndsAt($secondEnd);
         $secondPrice->setChannelCode('FIRST');
 
-        $productVariant->getChannelSpecialPricings()->willReturn(new ArrayCollection([$firstPrice, $secondPrice]));
+        return [$firstPrice, $secondPrice];
+    }
 
-        $context->buildViolation(Argument::any())->shouldBeCalled();
-        $violationBuilder->atPath(Argument::any())->shouldBeCalled();
-        $violationBuilder->addViolation()->shouldBeCalled();
+    private function overlappingDatesProvider(): array
+    {
+        return [
+            [null, null, null, null],
+            [null, null, null, new \DateTime('now')],
+            [null, null, new \DateTime('now'), null],
+            [new \DateTime('now'), new \DateTime('tomorrow'), new \DateTime('yesterday'), new \DateTime('tomorrow')],
+            [new \DateTime('now'), new \DateTime('tomorrow'), new \DateTime('yesterday'), null],
+            [new \DateTime('now'), new \DateTime('tomorrow'), null, new \DateTime('tomorrow')],
+            [new \DateTime('now'), null, null, new \DateTime('tomorrow')],
+        ];
+    }
 
-        $this->validate($productVariant, $constraint);
+    private function notOverlappingDatesProvider(): array
+    {
+        return [
+            [new \DateTime('tomorrow'), null, null, new \DateTime('now')],
+            [new \DateTime('yesterday'), new \DateTime('now'), new \DateTime('+1 minute'), new \DateTime('tomorrow')],
+        ];
     }
 }

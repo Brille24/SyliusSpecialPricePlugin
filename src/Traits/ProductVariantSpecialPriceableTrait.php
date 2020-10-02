@@ -29,6 +29,11 @@ trait ProductVariantSpecialPriceableTrait
 
     public function __construct()
     {
+        $this->initSpecialPricings();
+    }
+
+    public function initSpecialPricings(): void
+    {
         $this->channelSpecialPricings = new ArrayCollection();
     }
 

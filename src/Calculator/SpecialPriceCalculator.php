@@ -5,18 +5,16 @@ declare(strict_types=1);
 namespace Brille24\SyliusSpecialPricePlugin\Calculator;
 
 use Brille24\SyliusSpecialPricePlugin\Traits\ProductVariantSpecialPriceableInterface;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
-class SpecialPriceCalculator implements ProductVariantPriceCalculatorInterface
+class SpecialPriceCalculator implements ProductVariantPricesCalculatorInterface
 {
-    /**
-     * @var ProductVariantPriceCalculatorInterface
-     */
+    /** @var ProductVariantPricesCalculatorInterface */
     private $productVariantPriceCalculator;
 
-    public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    public function __construct(ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
     {
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
@@ -44,5 +42,10 @@ class SpecialPriceCalculator implements ProductVariantPriceCalculatorInterface
         Assert::notNull($price);
 
         return $price;
+    }
+
+    public function calculateOriginal(ProductVariantInterface $productVariant, array $context): int
+    {
+        return $this->productVariantPriceCalculator->calculateOriginal($productVariant, $context);
     }
 }

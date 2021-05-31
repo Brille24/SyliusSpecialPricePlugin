@@ -93,7 +93,7 @@ class ChannelSpecialPricing implements ChannelSpecialPricingInterface
         $this->endsAt = $endsAt;
     }
 
-    public function isActive(?\DateTimeInterface $dateTime): bool
+    public function isActive(?\DateTimeInterface $dateTime = null): bool
     {
         if (null === $dateTime) {
             $dateTime = new \DateTime('now');

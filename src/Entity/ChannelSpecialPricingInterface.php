@@ -29,5 +29,5 @@ interface ChannelSpecialPricingInterface extends ResourceInterface
 
     public function setEndsAt(?\DateTimeInterface $endsAt): void;
 
-    public function isActive(?\DateTimeInterface $dateTime): bool;
+    public function isActive(?\DateTimeInterface $dateTime = null): bool;
 }

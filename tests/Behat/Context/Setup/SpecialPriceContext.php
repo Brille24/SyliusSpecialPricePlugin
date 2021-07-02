@@ -6,7 +6,7 @@ namespace Tests\Brille24\SyliusSpecialPricePlugin\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Tests\Application\SyliusSpecialPricePlugin\Entity\ProductVariant;
@@ -18,13 +18,13 @@ class SpecialPriceContext implements Context
      */
     private $channelSpecialPriceFactory;
     /**
-     * @var ObjectManager
+     * @var EntityManagerInterface
      */
     private $objectManager;
 
     public function __construct(
         FactoryInterface $channelSpecialPriceFactory,
-        ObjectManager $objectManager
+        EntityManagerInterface $objectManager
     ) {
         $this->channelSpecialPriceFactory = $channelSpecialPriceFactory;
         $this->objectManager = $objectManager;

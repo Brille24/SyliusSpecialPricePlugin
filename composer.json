@@ -49,7 +49,9 @@
     "autoload": {
         "psr-4": {
             "Brille24\\SyliusSpecialPricePlugin\\": "src/",
-            "Tests\\Brille24\\SyliusSpecialPricePlugin\\": "tests/"
+            "Tests\\Brille24\\SyliusSpecialPricePlugin\\": "tests/",
+            "Tests\\Application\\SyliusSpecialPricePlugin\\": "tests/Application/src/",
+            "spec\\Brille24\\SyliusSpecialPricePlugin\\": "spec/"
         }
     },
     "autoload-dev": {

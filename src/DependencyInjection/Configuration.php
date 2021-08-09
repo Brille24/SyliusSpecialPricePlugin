@@ -10,12 +10,12 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 final class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritdoc}
+     * @psalm-suppress UnusedVariable
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode    = $treeBuilder->root('brille24_sylius_special_price_plugin');
+        $treeBuilder = new TreeBuilder('brille24_sylius_special_price_plugin');
+        $rootNode = $treeBuilder->getRootNode();
 
         return $treeBuilder;
     }

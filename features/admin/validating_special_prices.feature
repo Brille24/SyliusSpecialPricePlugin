@@ -31,6 +31,7 @@ Feature: Validating special prices
         And I set the end date to "tomorrow" for channel "United States"
 
         And I add a special price for channel "United States"
+        And I set the price to "$5.00" for channel "United States"
         And I set the start date to "yesterday" for channel "United States"
         And I set the end date to "tomorrow +1" for channel "United States"
 

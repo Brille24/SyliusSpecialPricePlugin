@@ -18,6 +18,11 @@ final class ChannelSpecialPricingFixture extends AbstractResourceFixture
     /** {@inheritdoc} */
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
+        /**
+         * @psalm-suppress PossiblyUndefinedMethod
+         * @psalm-suppress MixedMethodCall
+         * @psalm-suppress PossiblyNullReference
+         */
         $resourceNode
             ->children()
                 ->scalarNode('variant')->cannotBeEmpty()->end()

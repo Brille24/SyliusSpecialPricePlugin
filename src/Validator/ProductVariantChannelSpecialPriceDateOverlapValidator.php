@@ -8,19 +8,22 @@ use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
 use Brille24\SyliusSpecialPricePlugin\Traits\ProductVariantSpecialPriceableInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Webmozart\Assert\Assert;
 
 class ProductVariantChannelSpecialPriceDateOverlapValidator extends ConstraintValidator
 {
     /**
-     * @param ProductVariantSpecialPriceableInterface $productVariant
-     * @param ProductVariantChannelSpecialPriceDateOverlapConstraint $constraint
+     * @psalm-suppress ParamNameMismatch
      */
     public function validate($productVariant, Constraint $constraint): void
     {
+        Assert::isInstanceOf($productVariant, ProductVariantSpecialPriceableInterface::class);
+        Assert::isInstanceOf($constraint, ProductVariantChannelSpecialPriceDateOverlapConstraint::class);
+
         $specialPricesByChannel = [];
 
-        /** @var ChannelSpecialPricingInterface $channelSpecialPricing */
         foreach ($productVariant->getChannelSpecialPricings() as $channelSpecialPricing) {
+            /** @psalm-suppress PossiblyNullArrayOffset */
             $specialPricesByChannel[$channelSpecialPricing->getChannelCode()][] = $channelSpecialPricing;
         }
 

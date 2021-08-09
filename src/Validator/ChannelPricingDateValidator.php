@@ -12,12 +12,12 @@ use Webmozart\Assert\Assert;
 class ChannelPricingDateValidator extends ConstraintValidator
 {
     /**
-     * @param ChannelSpecialPricingInterface $channelSpecialPricing
-     * @param ChannelPricingDateConstraint $constraint
+     * @psalm-suppress ParamNameMismatch
      */
     public function validate($channelSpecialPricing, Constraint $constraint): void
     {
         Assert::isInstanceOf($constraint, ChannelPricingDateConstraint::class);
+        Assert::isInstanceOf($channelSpecialPricing, ChannelSpecialPricingInterface::class);
 
         // If either start or end is open, the date is valid.
         if (null === $channelSpecialPricing->getStartsAt() || null === $channelSpecialPricing->getEndsAt()) {

@@ -1,15 +1,6 @@
-includes:
-    - vendor/phpstan/phpstan-doctrine/extension.neon
-    - vendor/phpstan/phpstan-symfony/extension.neon
-    - vendor/phpstan/phpstan-webmozart-assert/extension.neon
-
 parameters:
     reportUnmatchedIgnoredErrors: false
     checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
-
-    symfony:
-        container_xml_path: tests/Application/var/cache/test/ApplicationTests_Brille24_SyliusSpecialPricePlugin_Application_KernelTestDebugContainer.xml
 
     excludes_analyse:
         # Makes PHPStan crash
@@ -20,6 +11,6 @@ parameters:
         - 'tests/Application/src/**.php'
 
     ignoreErrors:
-        - '/Parameter #1 \$configuration of method Symfony\\Component\\DependencyInjection\\Extension\\Extension::processConfiguration\(\) expects Symfony\\Component\\Config\\Definition\\ConfigurationInterface, Symfony\\Component\\Config\\Definition\\ConfigurationInterface\|null given./'
-        - '/Cannot call method scalarNode\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null./'
-        - '/Brille24\\SyliusSpecialPricePlugin\\Entity\\ChannelSpecialPricing::getId\(\) has no return typehint specified./'
+        - '/Parameter #1 \$configuration of method Symfony\\Component\\DependencyInjection\\Extension\\Extension::processConfiguration\(\) expects Symfony\\Component\\Config\\Definition\\ConfigurationInterface, Symfony\\Component\\Config\\Definition\\ConfigurationInterface\|null given\./'
+        - '/Method Brille24\\SyliusSpecialPricePlugin\\Entity\\ChannelSpecialPricing\:\:getId\(\) has no return typehint specified\./'
+        - '/Cannot call method scalarNode\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\./'

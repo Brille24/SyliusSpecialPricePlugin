@@ -11,19 +11,19 @@ use Sylius\Component\Core\Model\ChannelInterface;
 interface ProductVariantSpecialPriceableInterface
 {
     /**
-     * @return Collection
+     * @return Collection<int, ChannelSpecialPricingInterface>
      */
     public function getChannelSpecialPricings(): Collection;
 
     /**
-     * @param array $channelSpecialPricings
+     * @param ChannelSpecialPricingInterface[] $channelSpecialPricings
      */
     public function setChannelSpecialPricings(array $channelSpecialPricings): void;
 
     /**
      * @param ChannelInterface $channel
      *
-     * @return Collection
+     * @return Collection<int, ChannelSpecialPricingInterface>
      */
     public function getChannelSpecialPricingsForChannel(ChannelInterface $channel): Collection;
 

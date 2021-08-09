@@ -38,6 +38,7 @@ class ChannelSpecialPricing implements ChannelSpecialPricingInterface
      */
     protected $endsAt;
 
+    /** @psalm-suppress MissingReturnType */
     public function getId()
     {
         return $this->id;

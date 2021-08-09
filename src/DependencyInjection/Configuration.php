@@ -19,8 +19,15 @@ final class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('brille24_sylius_special_price_plugin');
+        /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
 
+        /**
+         * @psalm-suppress PossiblyUndefinedMethod
+         * @psalm-suppress MixedMethodCall
+         * @psalm-suppress PossiblyNullReference
+         * @psalm-suppress UnusedMethodCall
+         */
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
@@ -35,6 +42,11 @@ final class Configuration implements ConfigurationInterface
 
     private function addResourcesSection(ArrayNodeDefinition $node): void
     {
+        /**
+         * @psalm-suppress PossiblyUndefinedMethod
+         * @psalm-suppress MixedMethodCall
+         * @psalm-suppress PossiblyNullReference
+         */
         $node
             ->children()
                 ->arrayNode('resources')

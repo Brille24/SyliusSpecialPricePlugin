@@ -7,9 +7,11 @@ namespace Brille24\SyliusSpecialPricePlugin\ExampleFactory;
 use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricing;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Webmozart\Assert\Assert;
 
 final class ChannelSpecialPricingExampleFactory implements ExampleFactoryInterface
 {
@@ -37,6 +39,12 @@ final class ChannelSpecialPricingExampleFactory implements ExampleFactoryInterfa
     {
         $options = $this->optionsResolver->resolve($options);
 
+        Assert::isInstanceOf($options['variant'], ProductVariantInterface::class);
+        Assert::string($options['channelCode']);
+        Assert::integer($options['price']);
+        Assert::nullOrIsInstanceOf($options['startsAt'], \DateTimeInterface::class);
+        Assert::nullOrIsInstanceOf($options['endsAt'], \DateTimeInterface::class);
+
         $channelSpecialPricing = new ChannelSpecialPricing();
 
         $channelSpecialPricing->setProductVariant($options['variant']);
@@ -61,19 +69,29 @@ final class ChannelSpecialPricingExampleFactory implements ExampleFactoryInterfa
         $resolver->setRequired('channelCode')->setAllowedTypes('channelCode', 'string');
         $resolver->setRequired('price')->setAllowedTypes('price', 'integer');
 
+        /**
+         * @psalm-suppress UnusedClosureParam
+         * @psalm-suppress MissingClosureParamType
+         */
         $resolver->setDefined('startsAt')->setNormalizer('startsAt', function (Options $options, $previousValue): ?\DateTimeInterface {
             if (null === $previousValue || $previousValue instanceof \DateTime) {
                 return $previousValue;
             }
 
+            /** @var string $previousValue */
             return new \DateTime($previousValue);
         });
 
+        /**
+         * @psalm-suppress UnusedClosureParam
+         * @psalm-suppress MissingClosureParamType
+         */
         $resolver->setDefined('endsAt')->setNormalizer('endsAt', function (Options $options, $previousValue): ?\DateTimeInterface {
             if (null === $previousValue || $previousValue instanceof \DateTime) {
                 return $previousValue;
             }
 
+            /** @var string $previousValue */
             return new \DateTime($previousValue);
         });
     }

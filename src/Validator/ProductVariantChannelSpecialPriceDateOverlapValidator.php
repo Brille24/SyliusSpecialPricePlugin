@@ -12,6 +12,9 @@ use Webmozart\Assert\Assert;
 
 class ProductVariantChannelSpecialPriceDateOverlapValidator extends ConstraintValidator
 {
+    /**
+     * @psalm-suppress ParamNameMismatch
+     */
     public function validate($productVariant, Constraint $constraint): void
     {
         Assert::isInstanceOf($productVariant, ProductVariantSpecialPriceableInterface::class);
@@ -19,8 +22,8 @@ class ProductVariantChannelSpecialPriceDateOverlapValidator extends ConstraintVa
 
         $specialPricesByChannel = [];
 
-        /** @var ChannelSpecialPricingInterface $channelSpecialPricing */
         foreach ($productVariant->getChannelSpecialPricings() as $channelSpecialPricing) {
+            /** @psalm-suppress PossiblyNullArrayOffset */
             $specialPricesByChannel[$channelSpecialPricing->getChannelCode()][] = $channelSpecialPricing;
         }
 

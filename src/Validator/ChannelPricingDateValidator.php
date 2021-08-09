@@ -11,6 +11,9 @@ use Webmozart\Assert\Assert;
 
 class ChannelPricingDateValidator extends ConstraintValidator
 {
+    /**
+     * @psalm-suppress ParamNameMismatch
+     */
     public function validate($channelSpecialPricing, Constraint $constraint): void
     {
         Assert::isInstanceOf($constraint, ChannelPricingDateConstraint::class);

@@ -9,17 +9,24 @@ use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Webmozart\Assert\Assert;
 
 class ChannelSpecialPricingType extends AbstractResourceType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        Assert::isInstanceOf($options['channel'], ChannelInterface::class);
+        Assert::isInstanceOf($options['channel']->getBaseCurrency(), CurrencyInterface::class);
+        Assert::nullOrIsInstanceOf($options['product_variant'], ProductVariantInterface::class);
+
+        /** @psalm-suppress PossiblyNullReference */
         $builder
             ->add('price', MoneyType::class, [
                 'label'    => 'brille24.form.channel_special_price.price',
@@ -67,7 +74,12 @@ class ChannelSpecialPricingType extends AbstractResourceType
 
             ->setDefaults([
                 'label' => function (Options $options): string {
-                    return $options['channel']->getName();
+                    Assert::isInstanceOf($options['channel'], ChannelInterface::class);
+
+                    $channelName = $options['channel']->getName();
+                    Assert::string($channelName);
+
+                    return $channelName;
                 },
             ])
         ;

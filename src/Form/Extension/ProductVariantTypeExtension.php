@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Form\Extension;
 
+use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
 use Brille24\SyliusSpecialPricePlugin\Form\Type\ChannelSpecialPricingType;
 use Brille24\SyliusSpecialPricePlugin\Traits\ProductVariantSpecialPriceableInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
@@ -53,6 +54,7 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void {
             /** @var ProductVariantSpecialPriceableInterface $productVariant */
             $productVariant = $event->getData();
+            /** @var array<ChannelSpecialPricingInterface[]> $formSpecialPricings */
             $formSpecialPricings = $event->getForm()->get('channelSpecialPricings')->getData();
 
             /*

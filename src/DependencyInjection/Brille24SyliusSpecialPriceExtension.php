@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Webmozart\Assert\Assert;
 
 final class Brille24SyliusSpecialPriceExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
@@ -21,6 +22,9 @@ final class Brille24SyliusSpecialPriceExtension extends AbstractResourceExtensio
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
+
+        Assert::string($config['driver']);
+        Assert::isArray($config['resources']);
 
         $this->registerResources('brille24', $config['driver'], $config['resources'], $container);
 

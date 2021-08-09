@@ -47,7 +47,7 @@ class ProductVariantCreatePage extends CreatePage
         $priceFields = $collection->findAll('css', 'input[id$="_price"]');
         $field = end($priceFields);
 
-        $field->setValue($price);
+        $field->setValue($price / 100);
     }
 
     /**

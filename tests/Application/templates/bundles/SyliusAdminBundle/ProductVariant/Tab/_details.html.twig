@@ -14,7 +14,7 @@
             {{ form_row(form.channelPricings) }}
 
             <div class="ui segment">
-                {% include 'Brille24SyliusSpecialPricePlugin::_specialPrice.html.twig' with {
+                {% include '@Brille24SyliusSpecialPricePlugin/_specialPrice.html.twig' with {
                     'form': form.channelSpecialPricings
                 } %}
             </div>

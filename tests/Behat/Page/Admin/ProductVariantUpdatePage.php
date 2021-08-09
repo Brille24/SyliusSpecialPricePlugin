@@ -47,7 +47,7 @@ class ProductVariantUpdatePage extends UpdatePage
         $priceFields = $collection->findAll('css', 'input[id$="_price"]');
         $field = end($priceFields);
 
-        $field->setValue($price);
+        $field->setValue($price / 100);
     }
 
     /**

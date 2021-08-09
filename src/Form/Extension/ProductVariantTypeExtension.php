@@ -29,7 +29,7 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
             $event->getForm()->add('channelSpecialPricings', ChannelCollectionType::class, [
                 'mapped'        => false,
                 'entry_type'    => CollectionType::class,
-                'entry_options' => function (ChannelInterface $channel) use ($productVariant) {
+                'entry_options' => function (ChannelInterface $channel) use ($productVariant): array {
                     // Get all special prices by channel
                     $specialPrices = $productVariant->getChannelSpecialPricingsForChannel($channel);
 

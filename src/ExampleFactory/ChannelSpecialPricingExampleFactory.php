@@ -61,7 +61,7 @@ final class ChannelSpecialPricingExampleFactory implements ExampleFactoryInterfa
         $resolver->setRequired('channelCode')->setAllowedTypes('channelCode', 'string');
         $resolver->setRequired('price')->setAllowedTypes('price', 'integer');
 
-        $resolver->setDefined('startsAt')->setNormalizer('startsAt', function (Options $options, $previousValue) {
+        $resolver->setDefined('startsAt')->setNormalizer('startsAt', function (Options $options, $previousValue): ?\DateTimeInterface {
             if (null === $previousValue || $previousValue instanceof \DateTime) {
                 return $previousValue;
             }
@@ -69,7 +69,7 @@ final class ChannelSpecialPricingExampleFactory implements ExampleFactoryInterfa
             return new \DateTime($previousValue);
         });
 
-        $resolver->setDefined('endsAt')->setNormalizer('endsAt', function (Options $options, $previousValue) {
+        $resolver->setDefined('endsAt')->setNormalizer('endsAt', function (Options $options, $previousValue): ?\DateTimeInterface {
             if (null === $previousValue || $previousValue instanceof \DateTime) {
                 return $previousValue;
             }

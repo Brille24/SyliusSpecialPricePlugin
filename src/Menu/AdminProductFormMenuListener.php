@@ -19,7 +19,7 @@ final class AdminProductFormMenuListener
             return;
         }
 
-        $specialPricingsTab = '@Brille24SyliusSpecialPricePlugin/Resources/views/Admin/ProductVariant/Tab/_specialPricings.html.twig';
+        $specialPricingsTab = '@Brille24SyliusSpecialPricePlugin/Admin/ProductVariant/Tab/_specialPricings.html.twig';
         $menu
             ->addChild('channelSpecialPricings')
             ->setAttribute('template', $specialPricingsTab)

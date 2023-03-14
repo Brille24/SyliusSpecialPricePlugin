@@ -15,7 +15,7 @@ class ProductVariantChannelSpecialPriceDateOverlapValidator extends ConstraintVa
     /**
      * @psalm-suppress ParamNameMismatch
      */
-    public function validate($productVariant, Constraint $constraint): void
+    public function validate(mixed $productVariant, Constraint $constraint): void
     {
         Assert::isInstanceOf($productVariant, ProductVariantSpecialPriceableInterface::class);
         Assert::isInstanceOf($constraint, ProductVariantChannelSpecialPriceDateOverlapConstraint::class);

@@ -21,15 +21,14 @@ final class ChannelSpecialPricingFixture extends AbstractResourceFixture
         /**
          * @psalm-suppress PossiblyUndefinedMethod
          * @psalm-suppress MixedMethodCall
-         * @psalm-suppress PossiblyNullReference
          */
         $resourceNode
             ->children()
                 ->scalarNode('variant')->cannotBeEmpty()->end()
-                ->scalarNode('channelCode')->cannotBeEmpty()->end()
-                ->integerNode('price')->min(0)->end()
-                ->scalarNode('startsAt')->defaultNull()->end()
-                ->scalarNode('endsAt')->defaultNull()->end()
+                ?->scalarNode('channelCode')->cannotBeEmpty()->end()
+                ?->integerNode('price')->min(0)->end()
+                ?->scalarNode('startsAt')->defaultNull()->end()
+                ?->scalarNode('endsAt')->defaultNull()->end()
             ->end()
         ;
     }

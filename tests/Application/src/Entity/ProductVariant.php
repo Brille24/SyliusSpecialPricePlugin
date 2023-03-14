@@ -10,10 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Core\Model\ProductVariant as SyliusProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-/**
- * @ORM\MappedSuperclass
- * @ORM\Table(name="sylius_product_variant")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'sylius_product_variant')]
 class ProductVariant extends SyliusProductVariant implements ProductVariantInterface, ProductVariantSpecialPriceableInterface
 {
     use ProductVariantSpecialPriceableTrait {

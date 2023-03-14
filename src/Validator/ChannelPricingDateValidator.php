@@ -14,7 +14,7 @@ class ChannelPricingDateValidator extends ConstraintValidator
     /**
      * @psalm-suppress ParamNameMismatch
      */
-    public function validate($channelSpecialPricing, Constraint $constraint): void
+    public function validate(mixed $channelSpecialPricing, Constraint $constraint): void
     {
         Assert::isInstanceOf($constraint, ChannelPricingDateConstraint::class);
         Assert::isInstanceOf($channelSpecialPricing, ChannelSpecialPricingInterface::class);

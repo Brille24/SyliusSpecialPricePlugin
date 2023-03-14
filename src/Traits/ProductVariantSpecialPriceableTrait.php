@@ -13,19 +13,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait ProductVariantSpecialPriceableTrait
 {
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity="Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface",
-     *     mappedBy="productVariant",
-     *     orphanRemoval=true,
-     *     cascade={"all"}
-     * )
-     *
-     * @Assert\Valid()
-     *
-     * @var Collection
-     */
-    protected $channelSpecialPricings;
+    #[ORM\OneToMany(
+        mappedBy: "productVariant",
+        targetEntity: "Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface",
+        cascade: ['all'],
+        orphanRemoval: true,
+    )]
+    #[Assert\Valid]
+    protected Collection $channelSpecialPricings;
 
     public function __construct()
     {
@@ -58,11 +53,9 @@ trait ProductVariantSpecialPriceableTrait
      */
     public function getChannelSpecialPricingsForChannel(ChannelInterface $channel): Collection
     {
-        $specialPricings = $this->channelSpecialPricings->filter(function (ChannelSpecialPricingInterface $specialPricing) use ($channel) {
+        return $this->channelSpecialPricings->filter(function (ChannelSpecialPricingInterface $specialPricing) use ($channel) {
             return $specialPricing->getChannelCode() === $channel->getCode();
         });
-
-        return $specialPricings;
     }
 
     /**

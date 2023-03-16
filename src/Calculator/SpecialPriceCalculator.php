@@ -15,12 +15,8 @@ use Webmozart\Assert\Assert;
  */
 class SpecialPriceCalculator implements ProductVariantPricesCalculatorInterface
 {
-    /** @var ProductVariantPricesCalculatorInterface */
-    private $productVariantPriceCalculator;
-
-    public function __construct(ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
+    public function __construct(private ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
     {
-        $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
     /**

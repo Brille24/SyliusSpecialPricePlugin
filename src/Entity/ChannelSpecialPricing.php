@@ -4,42 +4,25 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Entity;
 
+use DateTimeInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
+/** @psalm-suppress MissingConstructor */
 class ChannelSpecialPricing implements ChannelSpecialPricingInterface
 {
-    /**
-     * @var mixed
-     */
-    protected $id;
+    protected int $id;
 
-    /**
-     * @var ProductVariantInterface|null
-     */
-    protected $productVariant;
+    protected ?ProductVariantInterface $productVariant = null;
 
-    /**
-     * @var int|null
-     */
-    protected $price;
+    protected ?int $price = null;
 
-    /**
-     * @var string|null
-     */
-    protected $channelCode;
+    protected ?string $channelCode = null;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
-    protected $startsAt;
+    protected ?DateTimeInterface $startsAt = null;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
-    protected $endsAt;
+    protected ?DateTimeInterface $endsAt = null;
 
-    /** @psalm-suppress MissingReturnType */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }

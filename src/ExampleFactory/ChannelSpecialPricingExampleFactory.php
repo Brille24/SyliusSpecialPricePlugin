@@ -5,37 +5,34 @@ declare(strict_types=1);
 namespace Brille24\SyliusSpecialPricePlugin\ExampleFactory;
 
 use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricing;
+use Brille24\SyliusSpecialPricePlugin\Entity\ChannelSpecialPricingInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
 
 final class ChannelSpecialPricingExampleFactory implements ExampleFactoryInterface
 {
-    /** @var ProductVariantRepositoryInterface */
-    private $productVariantRepository;
-
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     /**
-     * ChannelSpecialPricingExampleFactory constructor.
-     *
      * @param ProductVariantRepositoryInterface $productVariantRepository
+     * @param FactoryInterface<ChannelSpecialPricing> $channelSpeciarPricingFactory
      */
-    public function __construct(ProductVariantRepositoryInterface $productVariantRepository)
-    {
-        $this->productVariantRepository = $productVariantRepository;
-
+    public function __construct(
+        private ProductVariantRepositoryInterface $productVariantRepository,
+        private FactoryInterface $channelSpeciarPricingFactory,
+    ) {
         $this->optionsResolver = new OptionsResolver();
         $this->configureOptions($this->optionsResolver);
     }
 
     /** {@inheritdoc} */
-    public function create(array $options = []): ChannelSpecialPricing
+    public function create(array $options = []): ChannelSpecialPricingInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -45,7 +42,7 @@ final class ChannelSpecialPricingExampleFactory implements ExampleFactoryInterfa
         Assert::nullOrIsInstanceOf($options['startsAt'], \DateTimeInterface::class);
         Assert::nullOrIsInstanceOf($options['endsAt'], \DateTimeInterface::class);
 
-        $channelSpecialPricing = new ChannelSpecialPricing();
+        $channelSpecialPricing = $this->channelSpeciarPricingFactory->createNew();
 
         $channelSpecialPricing->setProductVariant($options['variant']);
         $channelSpecialPricing->setChannelCode($options['channelCode']);

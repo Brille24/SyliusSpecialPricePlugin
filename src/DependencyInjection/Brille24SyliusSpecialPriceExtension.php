@@ -39,7 +39,7 @@ final class Brille24SyliusSpecialPriceExtension extends AbstractResourceExtensio
 
     protected function getMigrationsDirectory(): string
     {
-        return '@Brille24SyliusSpecialPricePlugin/Migrations';
+        return '@Brille24SyliusSpecialPricePlugin/src/Migrations';
     }
 
     protected function getNamespacesOfMigrationsExecutedBefore(): array

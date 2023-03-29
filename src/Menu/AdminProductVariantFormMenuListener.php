@@ -4,22 +4,15 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusSpecialPricePlugin\Menu;
 
-use Sylius\Bundle\AdminBundle\Event\ProductMenuBuilderEvent;
+use Sylius\Bundle\AdminBundle\Event\ProductVariantMenuBuilderEvent;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
-#[AsEventListener(event: 'sylius.menu.admin.product.form', method: 'addItems')]
-final class AdminProductFormMenuListener
+#[AsEventListener(event: 'sylius.menu.admin.product_variant.form', method: 'addItems')]
+final class AdminProductVariantFormMenuListener
 {
-    /**
-     * @param ProductMenuBuilderEvent $event
-     */
-    public function addItems(ProductMenuBuilderEvent $event): void
+    public function addItems(ProductVariantMenuBuilderEvent $event): void
     {
         $menu = $event->getMenu();
-
-        if ($event->getProduct()->isConfigurable()) {
-            return;
-        }
 
         $specialPricingsTab = '@Brille24SyliusSpecialPricePlugin/Admin/ProductVariant/Tab/_specialPricings.html.twig';
         $menu

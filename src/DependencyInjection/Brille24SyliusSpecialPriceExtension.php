@@ -10,7 +10,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 final class Brille24SyliusSpecialPriceExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
@@ -22,9 +22,9 @@ final class Brille24SyliusSpecialPriceExtension extends AbstractResourceExtensio
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
 
-        $loader->load('services.xml');
+        $loader->load('services.php');
     }
 
     public function getConfiguration(array $config, ContainerBuilder $container): ConfigurationInterface

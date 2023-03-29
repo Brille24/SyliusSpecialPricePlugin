@@ -1,9 +1,0 @@
-<container xmlns="http://symfony.com/schema/dic/services">
-    <services>
-        <service class="Brille24\SyliusSpecialPricePlugin\Menu\AdminProductFormMenuListener"
-                 id="brille24.sylius_special_price_plugin.menu.admin_product_form_menu_listener"
-        >
-            <tag name="kernel.event_listener" event="sylius.menu.admin.product.form" method="addItems" />
-        </service>
-    </services>
-</container>

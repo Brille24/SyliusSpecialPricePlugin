@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Brille24\SyliusSpecialPricePlugin\Menu;
 
 use Sylius\Bundle\AdminBundle\Event\ProductMenuBuilderEvent;
-use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
-#[AsEventListener(event: 'sylius.menu.admin.product.form', method: 'addItems')]
 final class AdminProductFormMenuListener
 {
     /**

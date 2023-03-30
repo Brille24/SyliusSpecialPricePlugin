@@ -6,6 +6,7 @@ namespace Brille24\SyliusSpecialPricePlugin\Validator;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 class ProductVariantChannelSpecialPriceDateOverlapConstraint extends Constraint
 {
     /** @var string */

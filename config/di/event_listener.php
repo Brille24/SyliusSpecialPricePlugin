@@ -9,7 +9,11 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $services->set(AdminProductFormMenuListener::class);
+    $services->set(AdminProductFormMenuListener::class)
+        ->tag('kernel.event_listener', ['event' => 'sylius.menu.admin.product.form', 'method' => 'addItems'])
+    ;
 
-    $services->set(AdminProductVariantFormMenuListener::class);
+    $services->set(AdminProductVariantFormMenuListener::class)
+        ->tag('kernel.event_listener', ['event' => 'sylius.menu.admin.product_variant.form', 'method' => 'addItems'])
+    ;
 };

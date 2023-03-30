@@ -5,18 +5,21 @@
     {% import _self as self %}
     {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
 
-    {% spaceless %}
+    {% apply spaceless %}
         <div data-form-type="collection" {{ block('widget_container_attributes') }}
-                {% if prototype is defined and allow_add %}
-                    data-prototype='{{ self.special_price_collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
-                    data-prototype-name='{{ prototype.vars.name }}'
-                {%- endif -%}
+            {% if prototype is defined and allow_add %}
+                data-prototype='{{ self.special_price_collection_item(prototype, allow_delete, button_delete_label, prototype.vars.name)|e }}'
+                data-prototype-name='{{ prototype.vars.name }}'
+            {%- endif -%}
         >
             {{ error(form.vars.errors) }}
 
             {% if prototypes|default is iterable %}
                 {% for key, subPrototype in prototypes %}
-                    <input type="hidden" data-form-prototype="{{ key }}" value="{{ self.special_price_collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}" />
+                    <input type="hidden" data-form-prototype="{{ key }}"
+                           value="{{ self.special_price_collection_item(subPrototype, allow_delete, button_delete_label, subPrototype.vars.name)|e }}"
+                           data-subprototype-name="{{ subPrototype.vars.name }}"
+                    />
                 {% endfor %}
             {% endif %}
 
@@ -33,11 +36,11 @@
                 </a>
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {%- endblock collection_widget %}
 
 {% macro special_price_collection_item(form, allow_delete, button_delete_label, index) %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div data-form-collection="item" data-form-collection-index="{{ index }}">
 
             <div class="ui segment">
@@ -59,5 +62,5 @@
                 </a>
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endmacro %}

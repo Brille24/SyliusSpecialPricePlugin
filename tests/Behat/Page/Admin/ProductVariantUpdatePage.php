@@ -16,6 +16,7 @@ class ProductVariantUpdatePage extends UpdatePage
      */
     public function addSpecialPriceForChannel(ChannelInterface $channel): void
     {
+        $this->getDocument()->find('css', '.item[data-tab="channelSpecialPricings"]')->click();
         $this->getDocument()->find('css', sprintf('.menu .item[data-tab="%s"]', $channel->getCode()))->click();
 
         $collection = $this->getDocument()->find('css', sprintf('#sylius_product_variant_channelSpecialPricings_%s', $channel->getCode()));

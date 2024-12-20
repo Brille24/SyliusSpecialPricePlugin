@@ -1,6 +1,9 @@
 # Sylius Special Price Plugin
 [![Build Status](https://travis-ci.org/Brille24/SyliusSpecialPricePlugin.svg?branch=master)](https://travis-ci.org/Brille24/SyliusSpecialPricePlugin)
 
+>[!warning]
+> THIS PLUGIN IS ABANDONED. Please use the catalog promotion functionality (in 1.13 and later) for this.
+
 This plugin provides a configuration for prices that are just active within a certain date range. So if you want to change the price for a product between the 1st May and the 1st of April, this plugin is for you.
 
 ### Installation
